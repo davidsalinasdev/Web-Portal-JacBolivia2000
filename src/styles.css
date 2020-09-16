@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import '~font-awesome/css/font-awesome.css';
+
+body {
+  background-color: #ffffffff
+}
+
+/* Iconos whatsapp y messenger */
+div.container-redes {
+  position: fixed;
+  z-index: 500;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+div.container-redes a img {
+  width: 65px;
+  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+  border-radius: 100%;
+  transition: all 300ms;
+
+}
+
+div.container-redes a {
+  margin-top: 5px;
+
+}
+
+div.container-redes a:hover img {
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.10);
+}
+
+/* FIN Iconos whatsapp y messenger */

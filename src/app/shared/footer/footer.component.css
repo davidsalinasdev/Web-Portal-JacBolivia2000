@@ -1,0 +1,79 @@
+.detalles-footer h3 span {
+  color: #ffb606;
+}
+
+.detalles-footer h3 {
+  color: white;
+}
+
+.detalles-footer p {
+  color: white;
+}
+
+.barra {
+  background-color: #0a335c;
+}
+
+.lista-carreras li a {
+  text-decoration: none;
+  color: white;
+  transition-duration: 0.6ms;
+}
+
+.lista-carreras li a:hover {
+  text-decoration: none;
+  color: #ffb606
+}
+
+.lista-carreras li {
+  list-style: none;
+}
+
+.lista-carreras {
+  padding-left: 0px;
+}
+
+.datos-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .datos-footer {
+    flex-wrap: nowrap;
+  }
+}
+
+.detalles-footer {
+  flex-basis: calc(50% - 1.5rem);
+}
+
+.redes-sociales-footer {
+  display: flex;
+  padding-left: 0px;
+}
+
+.redes-sociales-footer li {
+  list-style: none;
+}
+
+.redes-sociales-footer a {
+  color: white;
+  font-size: 2.5rem;
+  margin-right: 30px;
+  transition-duration: 0.6s;
+}
+
+.redes-sociales-footer a:hover {
+  color: #ffb606;
+}
+
+.detalles-footer p i {
+  color: #ffb606;
+}
+
+.derechos {
+  background-color: #061d33;
+}

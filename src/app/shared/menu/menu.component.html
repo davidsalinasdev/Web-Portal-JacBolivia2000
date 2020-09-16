@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark fondo animated fadeIn fast fixed-top">
+
+  <div class="container-fluid logo-menu" id="">
+
+    <a class="navbar-brand" href="#"><img class="img-fluid logoTecSur" src="../../../assets/img/imgenLogo.png"
+        alt="Logo tecnologico del sur"><span class="ml-3">Jac
+        <strong>Bolivia</strong></span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active" routerLinkActive="active">
+          <a (click)="this.inicio()" class="nav-link inicio" [routerLink]="[ '/home']">INICIO <span
+              class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a (click)="this.admiciones()" class="nav-link admiciones" [routerLink]="[ '/admicion']">CARRERAS</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a (click)="this.acerca()" class="nav-link acerca" [routerLink]="[ '/acerca']">ACERCA DE JAC
+            BOLIVIA</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a (click)="this.contacto()" class="nav-link contacto" [routerLink]="[ '/contacto']">CONTACTO</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a (click)="this.reservaciones()" class="nav-link reservaciones" [routerLink]="[ '/inscribete']">¡INSCRÍBETE
+            AHORA!</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</nav>

@@ -1,0 +1,53 @@
+nav {
+  /* border-bottom: 1px solid #fbbb00; */
+  box-shadow: 0px 0px 5px rgb(34, 34, 34);
+}
+
+.logoTecSur {
+  width: 6rem;
+}
+
+.fondo {
+
+  /* background-color: #0a335cd5; */
+  background-color: #0066cce7;
+
+
+  padding: 1.4rem;
+}
+
+div.logo-menu a.navbar-brand {
+  font-size: 2rem;
+  font-family: 'PT Sans',
+    sans-serif;
+}
+
+div.logo-menu div ul li a {
+  font-size: 1.2rem;
+  font-family: 'Oswald',
+    sans-serif
+}
+
+div.logo-menu div ul li a:hover {
+  /* color: #fe4918; */
+
+  border-bottom: 2px solid #fbbb00;
+}
+
+/* Estilo de con typeScript */
+.linea-activada {
+  border-bottom: 2px solid #fbbb00;
+  color: aliceblue;
+}
+
+.reservaciones {
+  margin-left: 20px;
+  /* padding: 15px !important;  */
+  border: 1px solid #fbbb00;
+  transition-duration: 0.6s;
+}
+
+.reservaciones:hover {
+  background-color: #fbbb00;
+  color: white !important;
+}
