@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // librerias
-
-
-
+// Rutas
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -17,23 +17,24 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { InscribeteComponent } from './components/inscribete/inscribete.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MenuComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-    AdmicionesComponent,
-    AcercaComponent,
-    ContactoComponent,
-    InscribeteComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
+    declarations: [
+        AppComponent,
+        MenuComponent,
+        HeaderComponent,
+        FooterComponent,
+        HomeComponent,
+        AdmicionesComponent,
+        AcercaComponent,
+        ContactoComponent,
+        InscribeteComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 // para el mapa
 const L = require('../../../assets/js/leaflet.js');
+
+// Servicios
+import { HomeService } from '../../services/home.service';
+
+// Url de la pagina
+import { global } from '../../services/global';
+
+
+
 // jquery en angular
 declare var $: any;
 
@@ -12,10 +21,82 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public listaOferta: any;
+  public listaCarreras: any;
+  public url: string;
+  public nuevaLista: any = [];
+  public nuevaListaCarreras: any = [];
+
+  constructor(private homeServices: HomeService) {
+    this.url = global.url;
+  }
 
   ngOnInit(): void {
+    window.scroll({
+      top: 0,
+      // left: 100,
+      // behavior: 'smooth'
+    });
     this.mapaBienesRaices();
+    this.indexPromo();
+    this.indexCarreras();
+  }
+  /**
+   * indexInvitados Lista todos los registros de invitados
+   */
+  public indexCarreras() {
+
+    this.homeServices.indexCarrera().subscribe(
+      response => {
+        // console.log(response);
+        if (response.status === 'success') {
+          this.listaCarreras = response.carrera;
+          console.log(this.listaCarreras);
+
+          this.listaCarreras.forEach(element => {
+            // console.log(element);
+            if (element.estado === 1) {
+              this.nuevaListaCarreras.push(element);
+            }
+          });
+          this.nuevaListaCarreras = this.nuevaListaCarreras.reverse();
+          console.log(this.nuevaListaCarreras);
+
+        }
+      },
+      errors => {
+        console.log(errors);
+      }
+    );
+
+  }
+
+  /**
+   * indexInvitados Lista todos los registros de invitados
+   */
+  public indexPromo() {
+
+    this.homeServices.indexPromocion().subscribe(
+      response => {
+        // console.log(response);
+        if (response.status === 'success') {
+          this.listaOferta = response.oferta;
+
+          this.listaOferta.forEach(element => {
+            // console.log(element);
+            if (element.estado === 1) {
+              this.nuevaLista.push(element);
+            }
+
+          });
+          this.nuevaLista = this.nuevaLista.reverse();
+        }
+      },
+      errors => {
+        console.log(errors);
+      }
+    );
+
   }
 
   /**

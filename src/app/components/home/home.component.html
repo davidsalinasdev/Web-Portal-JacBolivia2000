@@ -1,3 +1,40 @@
+<app-header></app-header>
+
+<!--Ofertas -->
+<div class="container animated fadeIn fast" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 text-center" id="">
+      <h2 class="mb-0">OFERTAS DE PROMOCIÓN</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
+
+    </div>
+  </div>
+
+</div>
+<div class="container-fluid " id="">
+  <div class="row " id="">
+    <div class="col-12" id="">
+      <div class="contenedor" id="">
+        <!-- Recupera info de la base de datos -->
+        <div *ngFor="let item of this.nuevaLista" class="tarjeta" id="" [routerLink]="[ '/inscribete' ]">
+
+          <div class="img-posision" id="">
+            <img class="" [src]="this.url+'promocion/getImagen/' + item.imagen" alt="Foto de la empresa ">
+            <a class="inscribete btn btn-warning btn-block" [routerLink]="[ '/inscribete' ]">¡Inscribete ahora! <i
+                class="fa fa-chevron-right"></i>
+            </a>
+          </div>
+          <h4 class="text-left ml-3">{{ item.titulo }}</h4>
+          <p class="text-left mb-4 letras" style="white-space:pre-line;"> {{ item.descripcion }}</p>
+
+        </div>
+        <!-- Fin Recupera info de la base de datos -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Nuestras carreras -->
 <div class="container animated fadeIn fast" id="">
   <div class="row mt-4" id="">
@@ -12,53 +49,23 @@
 </div>
 <div class="container animated fadeIn fast" id="">
   <div class="row m-2" id="">
-    <div class="col-12 flex-padre" id="">
+    <div class="col-12" id="">
+      <div class="row" id="">
 
-      <div class="carrera-academica mb-5" id="">
-        <img class="img-fluid" src="./../../../assets/img/estudiante.jpg" alt="Computacion">
-        <h1 class="mt-2">COMPUTACIÓN</h1>
-        <p>
-          Administración de Empresas, Contaduría Pública, Economía.</p>
-      </div>
-      <div class="carrera-academica mb-5" id="">
-        <img class="img-fluid" src="./../../../assets/img/estuden2.jpg" alt="Computacion">
-        <h1 class="mt-2">ADMINISTRACIÓN</h1>
-        <p>
-          Administración de Empresas, Contaduría Pública, Economía.</p>
-      </div>
-      <div class="carrera-academica mb-5" id="">
-        <img class="img-fluid" src="./../../../assets/img/estudiante.jpg" alt="Computacion">
-        <h1 class="mt-2">COMPUTACIÓN</h1>
-        <p>
-          Administración de Empresas, Contaduría Pública, Economía.</p>
-      </div>
-      <div class="carrera-academica mb-5" id="">
-        <img class="img-fluid" src="./../../../assets/img/estuden2.jpg" alt="Computacion">
-        <!-- <div class="img-carrera" id="">
-        </div> -->
-        <h1 class="mt-2">SECRETARIADO</h1>
-        <p>
-          Administración de Empresas, Contaduría Pública, Economía.</p>
-      </div>
-      <div class="carrera-academica mb-5" id="">
-        <img class="img-fluid" src="./../../../assets/img/estuden2.jpg" alt="Computacion">
-        <h1 class="mt-2">CONTADURIA</h1>
-        <p>
-          Administración de Empresas, Contaduría Pública, Economía.</p>
-      </div>
-      <div class="carrera-academica mb-5" id="">
-        <img class="img-fluid" src="./../../../assets/img/laptop.jpg" alt="Computacion">
-        <h1 class="mt-2">INGLES</h1>
-        <p>
-          Administración de Empresas, Contaduría Pública, Economía.</p>
+        <div *ngFor="let item of this.nuevaListaCarreras" class="col-12  col-md-6 carrera-academica mb-5" id="">
+          <img class="img-fluid" [src]="this.url+'carrera/getImagen/' + item.imagen" alt="Computacion"
+            style="width: 100%;">
+          <h2 class="mt-2">{{ item.titulo }}</h2>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
-<!-- Noticias destacadas -->
+<!-- Defensas de grado -->
 <div class="container-fluid animated fadeIn fast" id="">
-  <div class="row mt-4" id="">
+  <div class="row mt-2" id="">
     <div class="col-12 text-center" id="">
       <h2 class="mb-0">NOTICIAS DESTACADAS</h2>
       <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
@@ -213,7 +220,7 @@
 <div class="container-redes animated fadeIn fast" id="">
   <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
       title="Enviar mensage por facebook" alt="Imagen facebook"></a>
-  <a href="https://api.whatsapp.com/send?phone=76931047&text=Deseo comunicarme con una Agente de Ventas."
+  <a href="https://api.whatsapp.com/send?phone=+591 70788896&text=Deseo comunicarme con Jac Bolivia."
     target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
       alt="Imagen whatsapp"></a>
 </div>

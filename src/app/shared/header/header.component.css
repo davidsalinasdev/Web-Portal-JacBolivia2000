@@ -69,10 +69,32 @@
   align-items: center;
 }
 
+@media (min-width: 768px) {
+
+  /* logica */
+  .display-padre {
+    align-items: flex-end;
+  }
+}
+
 .display-padre h1 {
-  padding: 4rem 10rem !important;
+  padding: 1rem 1.2rem !important;
   border: 1px solid #ffb606;
   color: white;
   background-color: #ffb406a4;
   border-radius: 0.5rem;
+  display: flex;
+  text-shadow: 1px 2px #353535;
+  font-size: 1.5rem;
+
+}
+
+@media (min-width: 768px) {
+
+  /* logica */
+  .display-padre h1 {
+    padding: 2rem 5rem !important;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+  }
 }

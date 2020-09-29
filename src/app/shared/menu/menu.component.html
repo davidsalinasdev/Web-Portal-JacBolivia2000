@@ -1,9 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-dark fondo animated fadeIn fast fixed-top">
+<!-- <div class="container-fluid" id="PanelIzquierda">
+  <div class="row p-2 fondo-dos" id="">
+    <div class="col-12 col-md-6" id="">
+      <p class="mb-0 peque">Acreditada como PLENA mediante R.M 7887/02</p>
+    </div>
+    <div class="col-12 col-md-6" id="">
+      <p class="mb-0 peque text-right"><span class="barrita pr-2"> JAC BOLIVIA 2000 </span><span> <i
+            class="fa fa-facebook pl-2 pr-2"></i> <i class="fa fa-whatsapp"></i></span>
+      </p>
+    </div>
+  </div>
+</div> -->
+<nav class="navbar navbar-expand-lg navbar-dark fondo animated fadeIn fast index fixed-top2" id="menuMain">
 
   <div class="container-fluid logo-menu" id="">
 
-    <a class="navbar-brand" href="#"><img class="img-fluid logoTecSur" src="../../../assets/img/imgenLogo.png"
-        alt="Logo tecnologico del sur"><span class="ml-3">Jac
+    <a class="navbar-brand" href="#"><img class="img-fluid logoTecSur" src="../../../assets/img/imgLogo.png"
+        alt="Logo tecnologico del sur"><span class="ml-3 titulo-menu">JAC
         <strong>Bolivia</strong></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,8 +28,23 @@
           <a (click)="this.inicio()" class="nav-link inicio" [routerLink]="[ '/home']">INICIO <span
               class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle admiciones" href="#" id="navbarDropdownMenuLink" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            CARRERAS
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div *ngFor="let item of this.nuevaListaCarreras" class="" id="">
+              <a class="dropdown-item" [routerLink]="[ '/carrera',item.id]">{{ item.titulo }}</a>
+
+            </div>
+          </div>
+        </li>
         <li class="nav-item" routerLinkActive="active">
-          <a (click)="this.admiciones()" class="nav-link admiciones" [routerLink]="[ '/admicion']">CARRERAS</a>
+          <a (click)="this.defensa()" class="nav-link defensa" [routerLink]="[ '/defensa']">DEFENSAS DE GRADO</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a (click)="this.agasajo()" class="nav-link agasajo" [routerLink]="[ '/agasajo']">AGASAJO DE GRADO</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a (click)="this.acerca()" class="nav-link acerca" [routerLink]="[ '/acerca']">ACERCA DE JAC
@@ -26,6 +53,22 @@
         <li class="nav-item" routerLinkActive="active">
           <a (click)="this.contacto()" class="nav-link contacto" [routerLink]="[ '/contacto']">CONTACTO</a>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            MÁS
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Deportes</a>
+            <a class="dropdown-item" href="#">Biblioteca</a>
+            <a class="dropdown-item" href="#">Canciones</a>
+            <a class="dropdown-item" href="#">Danzas</a>
+            <a class="dropdown-item" href="#">Musica</a>
+            <a class="dropdown-item" href="#">Teatro</a>
+          </div>
+        </li>
+
         <li class="nav-item" routerLinkActive="active">
           <a (click)="this.reservaciones()" class="nav-link reservaciones" [routerLink]="[ '/inscribete']">¡INSCRÍBETE
             AHORA!</a>

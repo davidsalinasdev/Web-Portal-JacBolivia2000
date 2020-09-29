@@ -7,6 +7,9 @@ import { AdmicionesComponent } from './components/admiciones/admiciones.componen
 import { AcercaComponent } from './components/acerca/acerca.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { InscribeteComponent } from './components/inscribete/inscribete.component';
+import { DefensaComponent } from './components/defensa/defensa.component';
+import { AgasajoComponent } from './components/agasajo/agasajo.component';
+
 
 
 const routes: Routes = [
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'acerca', component: AcercaComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'inscribete', component: InscribeteComponent },
+  { path: 'defensa', component: DefensaComponent },
+  { path: 'agasajo', component: AgasajoComponent },
+
   { path: '**', component: HomeComponent }, // Cuando me equivoco de escribir la ruta.
 ];
 

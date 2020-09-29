@@ -1,0 +1,67 @@
+.carrera {
+  margin-top: 8rem;
+}
+
+.circulos i {
+  margin: 0px 5px;
+  color: #ffb606;
+  ;
+}
+
+.proposito h4 {
+  border-bottom: 1px solid #ffb606;
+
+}
+
+.hero-acerca {
+  background-image: url(../../../assets/img/egresado_1.jpg);
+  /* background-position: bottom; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 35rem;
+  animation: movimiento 30s infinite linear alternate;
+}
+
+@media (min-width: 1200px) {
+
+  /* logica */
+  .imagen-contacto {
+    animation: movimiento 15s infinite linear alternate;
+  }
+}
+
+
+@keyframes movimiento {
+  form {
+    background-position: bottom left;
+  }
+
+  to {
+    background-position: top right;
+  }
+}
+
+.display-padre {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-padre h1 {
+  padding: 2rem 3.5rem !important;
+  border: 1px solid #ffb606;
+  color: white;
+  background-color: #ffb406a4;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 768px) {
+
+  /* logica */
+  .display-padre h1 {
+    padding: 4rem 10rem !important;
+  }
+}

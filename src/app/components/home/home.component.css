@@ -1,3 +1,7 @@
+/* font-family: 'Open Sans',
+sans-serif;
+font-family: 'Roboto',
+sans-serif; */
 .circulos i {
   margin: 0px 5px;
   color: #ffb606;
@@ -10,31 +14,22 @@
   ;
 }
 
-.flex-padre {
+/* .flex-padre {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
+} */
 
-.carrera-academica {
+/* .carrera-academica {
   flex-basis: calc(50% - 2rem);
-}
+} */
 
-@media (min-width: 992px) {
-
-  /* logica */
-  .flex-padre {
-    /* flex-wrap: nowrap; */
-    justify-content: space-between;
-  }
-}
-
-.flex-padre .carrera-academica img {
+.carrera-academica img {
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.6);
   border-color: #000000;
   border-radius: 0.5rem;
-  transition: all .3s ease;
+  transition: all .1s ease;
 
 }
 
@@ -43,7 +38,7 @@
   /* filter: grayscale(1); */
   transform: scale(1.05);
   cursor: pointer;
-  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.6);
 
 }
 
@@ -98,9 +93,72 @@
   }
 }
 
+/* Sector tarjeta */
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+}
+
+.contenedor .tarjeta {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 20px;
+  text-align: center;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+
+.contenedor .tarjeta:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.contenedor .tarjeta img {
+  width: 300px;
+  height: auto;
+}
+
+.contenedor .tarjeta h4 {
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.contenedor .tarjeta p {
+  padding: 0px 1rem;
+  font-size: 0.9rem;
+  font-weight: 300px;
+  font-family: 'Open Sans',
+    sans-serif;
+}
+
+.contenedor .tarjeta a {
+  font-weight: 300;
+  text-decoration: none;
+  /* color: #3498db; */
+}
+
+/* Fin sector tarjeta */
+
+
 /* Mapa del evento */
 .mapa {
   height: 400px;
   /* background-color: #ffb606; */
   /* background-image: url(../../../assets/img/imgenLogo.png); */
+}
+
+.img-posision {
+  position: relative;
+}
+
+.inscribete {
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  transition-duration: 0.6s;
 }
