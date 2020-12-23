@@ -1,8 +1,10 @@
 .imagen-contacto {
-  background-image: url(../../../assets/img/INSCRIBETE.jpg);
-  /* background-position: top; */
-  background-size: cover 50%;
-  height: 35rem;
+  /* background-image: url(../../../assets/img/INSCRIBETE.jpg); */
+  background-position: center center;
+  background-size: cover 30%;
+  background-repeat: no-repeat;
+  /* height: 35rem; */
+  height: 100vh;
   animation: movimiento 30s infinite linear alternate;
 }
 
@@ -10,7 +12,7 @@
 
   /* logica */
   .imagen-contacto {
-    animation: movimiento 15s infinite linear alternate;
+    animation: movimiento 20s infinite linear alternate;
   }
 }
 
@@ -29,17 +31,21 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .display-padre h1 {
   padding: 0.5rem 1rem !important;
-  border: 1px solid #ffb606;
+  /* border: 1px solid #ffb606; */
   color: white;
-  background-color: #ffb406a4;
+  /* background-color: #ffb406a4; */
   border-radius: 0.5rem;
   font-size: 2rem;
+  text-shadow: 0px 3px #353535;
+  border: 3px solid #ffb606;
+  background: rgba(0, 0, 0, .5);
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 575px) {
@@ -101,4 +107,43 @@
   height: 400px;
   /* background-color: #ffb606; */
   /* background-image: url(../../../assets/img/imgenLogo.png); */
+}
+
+.text-color-danger {
+  color: red;
+}
+
+.sms-inscripcion {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+}
+
+.titulo-bienvenido h2 {
+  text-align: center;
+}
+
+.titulo-bienvenido p {
+
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-family: 'Open Sans', sans-serif !important;
+
+}
+
+.borde-info {
+  border: 0.2rem solid#013f76;
+
+  border-radius: 0.5rem;
+
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  background-color: #ffffffff
+}
+
+.imagen-logo {
+  width: 150px;
+}
+
+.fondo-card-body {
+  background-color: #013f76;
 }

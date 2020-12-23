@@ -1,32 +1,35 @@
 <app-header></app-header>
 
-<!--Ofertas -->
+<!--Ofertas de promocion -->
 <div class="container animated fadeIn fast" id="">
   <div class="row mt-5" id="">
     <div class="col-12 text-center" id="">
-      <h2 class="mb-0">OFERTAS DE PROMOCIÓN</h2>
-      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
-
+      <h2 class="mb-0 ">OFERTAS DE PROMOCIÓN</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
     </div>
   </div>
-
 </div>
+<!-- Ofertas de promocion -->
 <div class="container-fluid " id="">
   <div class="row " id="">
-    <div class="col-12" id="">
+    <div class="col" id="">
       <div class="contenedor" id="">
         <!-- Recupera info de la base de datos -->
         <div *ngFor="let item of this.nuevaLista" class="tarjeta" id="" [routerLink]="[ '/inscribete' ]">
 
           <div class="img-posision" id="">
-            <img class="" [src]="this.url+'promocion/getImagen/' + item.imagen" alt="Foto de la empresa ">
+            <img class="img-fluid" [src]="this.urlImagen+ item.imagen" alt="Foto de la empresa ">
             <a class="inscribete btn btn-warning btn-block" [routerLink]="[ '/inscribete' ]">¡Inscribete ahora! <i
                 class="fa fa-chevron-right"></i>
             </a>
           </div>
           <h4 class="text-left ml-3">{{ item.titulo }}</h4>
-          <p class="text-left mb-4 letras" style="white-space:pre-line;"> {{ item.descripcion }}</p>
-
+          <!-- <p class="text-left mb-4 letras" style="white-space:pre-line;"> {{ item.descripcion }}</p> -->
+          <div class="ql-container ql-snow" style="border-width: 0;">
+            <div class="ql-editor letras" [innerHTML]="item.descripcion | sanitizeHtml">
+            </div>
+          </div>
         </div>
         <!-- Fin Recupera info de la base de datos -->
       </div>
@@ -34,27 +37,63 @@
   </div>
 </div>
 
-
-<!-- Nuestras carreras -->
-<div class="container animated fadeIn fast" id="">
-  <div class="row mt-4" id="">
+<!-- Contacto -->
+<div class="container-fluid animated fadeIn fast " id="">
+  <div class="row mt-5" id="">
     <div class="col-12 text-center" id="">
-      <h2 class="mb-0">NUESTRAS CARRERAS</h2>
-      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque amet non, libero, rem illum repellendus ad
-        necessitatibus, quos facilis impedit ea! Officiis mollitia eum doloribus quia. Harum ipsum voluptatem itaque!
-      </p>
+      <h2 class="mb-0">CONTACTO</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
     </div>
   </div>
 </div>
+<!-- Contacto -->
+<div class="container-fluid animated fadeIn fast" id="">
+  <div class="row mt-2" id="">
+    <!-- <img src="../../../assets/img/call-cent.jpg" alt=""> -->
+    <div [ngStyle]="{'background-image':'url('+'../../../assets/img/book.jpg'+' )'}"
+      class="col-12 img-correo contactanos" id="">
+      <div class="container" id="">
+        <div class="row" id="">
+          <div class="col-12" id="">
+            <div class="contactos" id="">
+              <h1>Creamos é impulsamos un profesional único y diferente</h1>
+              <h1>¡Estúdia con nosotros!</h1>
+              <button [routerLink]="[ '/inscribete' ]">CONTACTANOS</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Nuestras carreras -->
 <div class="container animated fadeIn fast" id="">
-  <div class="row m-2" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 text-center" id="">
+      <h2 class="mb-0">NUESTRAS CARRERAS</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
+
+    </div>
+  </div>
+</div>
+<!-- Nuestras carreras -->
+<div class="container animated fadeIn fast" id="">
+  <div class="row md-mb-2" id="">
     <div class="col-12" id="">
       <div class="row" id="">
 
-        <div *ngFor="let item of this.nuevaListaCarreras" class="col-12  col-md-6 carrera-academica mb-5" id="">
-          <img class="img-fluid" [src]="this.url+'carrera/getImagen/' + item.imagen" alt="Computacion"
-            style="width: 100%;">
+        <div *ngFor="let item of this.nuevaListaCarreras" class="col-12  col-md-6 carrera-academica mb-3 md-mb-5" id="">
+          <!-- <img class="img-fluid" [src]="this.url+'carrera/getImagen/' + item?.imagen" alt="Carreras"
+            style="width: 100%;"> -->
+          <div [ngStyle]="{'background-image':'url('+this.urlImagen+item.imagen+' )'}" class="imagen-contacto" id="">
+            <button [routerLink]="[ '/carreras', item.id ]" class="boton-carrera">Más información</button>
+          </div>
+
           <h2 class="mt-2">{{ item.titulo }}</h2>
         </div>
 
@@ -63,164 +102,123 @@
   </div>
 </div>
 
-<!-- Defensas de grado -->
-<div class="container-fluid animated fadeIn fast" id="">
-  <div class="row mt-2" id="">
-    <div class="col-12 text-center" id="">
-      <h2 class="mb-0">NOTICIAS DESTACADAS</h2>
-      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
-    </div>
-    <div class="col-12" id="">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active ">
-            <div class="flex-noticias" id="">
-              <!-- 1 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudiante.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-              <!-- 2 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudiante.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-              <!-- 3 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudiante.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="flex-noticias" id="">
-              <!-- 1 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail " src="./../../../assets/img/estuden2.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-              <!-- 2 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estuden2.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-              <!-- 3 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estuden2.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="flex-noticias" id="">
-              <!-- 1 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudent3.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-              <!-- 2 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudent3.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-              <!-- 3 -->
-              <div class="tarjeta" id="">
-                <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudent3.jpg" alt="">
-                <h4>!SOMOS CAMPEONES</h4>
-                <P>Cochabamba, 20 de septiembre de 2020</P>
-                <button class="btn btn-danger">VER MAS</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Mapa del instituto -->
 <div class="container-fluid animated fadeIn fast" id="">
-  <div class="row mt-5" id="">
+  <div class="row mt-1" id="">
     <div class="col-12 text-center" id="">
       <h2 class="mb-0">NUESTRA UBICACIÓN</h2>
-      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
     </div>
   </div>
   <div class="row mt-2 border" id="">
-    <div class="col-12 mapa" id="mapa">
+    <div class="col-12" id="">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8118136205512!2d-66.15330798093426!3d-17.399917894048045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373fa9f07fa49%3A0xdfe738282a404799!2sCalle%20Brasil%20%26%20Calle%20San%20Martin%2C%20Cochabamba!5e0!3m2!1ses-419!2sbo!4v1601904954117!5m2!1ses-419!2sbo"
+        width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
     </div>
   </div>
 </div>
 
-<!-- Eventos del instituto -->
-<div class="container-fluid animated fadeIn fast" id="">
-  <div class="row mt-5" id="">
+
+
+<!-- Noticias destacadas -->
+<div class="container-fluid animated fadeIn fast mt-5 mb-5" id="">
+  <div class="row mt-2" id="">
     <div class="col-12 text-center" id="">
-      <h2 class="mb-0">EVENTOS</h2>
-      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
+      <h2 class="mb-0">NOTICIAS DESTACADAS</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
+    </div>
+    <div class="col-12" id="">
+      <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+
+        <div class="carousel-inner">
+
+          <div *ngFor="let itemContador of this.listaTres, let i=index"
+            class="carousel-item {{ (i===0)? 'active':'' }}">
+            <div class="flex-noticias" id="">
+              <!-- 1 -->
+              <div *ngFor="let item of this.listaTres[i], let j=index" class="tarjeta mb-3 md-mb-0" id=""
+                style="width: 100%;">
+                <!-- <img class="img-fluid img-thumbnail" src="./../../../assets/img/estudiante.jpg" alt=""> -->
+                <div class="img-noticias" [ngStyle]="{'background-image':'url('+this.urlImagen+item.imagen+' )'}">
+                  <!-- <img src="../../../assets/img/promo1.jpg" class="" alt="..."> -->
+                </div>
+                <h3><strong>{{ item.titulo }}</strong></h3>
+                <P class="text-dark">Publicado el{{ item.fecha }}</P>
+                <a class="btn btn-danger text-center" [routerLink]="['/homeNoticias',item.id]">VER MAS</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Actividades y mas contenido -->
 <div class="container animated fadeIn fast" id="">
-  <div class="row mt-2" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 text-center" id="">
+      <h2 class="mb-0">ACTIVIDADES Y MAS CONTENIDO</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
+
+    </div>
+  </div>
+</div>
+<!-- Actividades y mas contenido -->
+<div class="container animated fadeIn fast" id="">
+  <div class="row md-mb-2" id="">
     <div class="col-12" id="">
-      <div class="flex-eventos row" id="">
-        <!-- 1 -->
-        <div class="tarjeta-eventos col-lg-4" id="">
-          <img class="img-fluid" src="./../../../assets/img/estudiante.jpg" alt="">
-          <h4>!SOMOS CAMPEONES</h4>
-          <P>Cochabamba, 20 de septiembre de 2020</P>
-          <button class="btn btn-warning btn-block">VER MAS</button>
+      <div class="row" id="">
+
+        <div class="col-12  col-md-6 carrera-academica mb-3 md-mb-5" id="">
+          <!-- <img class="img-fluid" [src]="this.url+'carrera/getImagen/' + item?.imagen" alt="Carreras"
+                              style="width: 100%;"> -->
+          <div [ngStyle]="{'background-image':'url('+'./../../../assets/img/foto.jpg'+' )'}" class="imagen-contacto"
+            id="">
+            <button class="boton-carrera" [routerLink]="[ '/reflexiones']">Entrar a reflexiones</button>
+          </div>
+          <!-- <img src="./../../../assets/img/books.jpg" alt=""> -->
+          <h2 class="mt-2">REFLEXIONES</h2>
         </div>
-        <!-- 2 -->
-        <div class="tarjeta-eventos col-lg-4" id="">
-          <img class="img-fluid" src="./../../../assets/img/estudiante.jpg" alt="">
-          <h4>!SOMOS CAMPEONES</h4>
-          <P>Cochabamba, 20 de septiembre de 2020</P>
-          <button class="btn btn-warning btn-block">VER MAS</button>
-        </div>
-        <!-- 3 -->
-        <div class="tarjeta-eventos col-lg-4" id="">
-          <img class="img-fluid" src="./../../../assets/img/estudiante.jpg" alt="">
-          <h4>!SOMOS CAMPEONES</h4>
-          <P>Cochabamba, 20 de septiembre de 2020</P>
-          <button class="btn btn-warning btn-block">VER MAS</button>
+
+        <div *ngFor="let item of this.nuevaListaMas" class="col-12  col-md-6 carrera-academica mb-3 md-mb-5" id="">
+          <!-- <img class="img-fluid" [src]="this.url+'carrera/getImagen/' + item?.imagen" alt="Carreras"
+            style="width: 100%;"> -->
+          <div [ngStyle]="{'background-image':'url('+this.urlImagen+item.imagen+' )'}" class="imagen-contacto" id="">
+            <button [routerLink]="[ '/carreras', item.id ]" class="boton-carrera">Más información</button>
+          </div>
+
+          <h2 class="mt-2">{{ item.titulo }}</h2>
         </div>
 
       </div>
     </div>
   </div>
 </div>
+
+
 
 <!-- seccion whatsapp en la web -->
 <div class="container-redes animated fadeIn fast" id="">
   <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
       title="Enviar mensage por facebook" alt="Imagen facebook"></a>
-  <a href="https://api.whatsapp.com/send?phone=+591 70788896&text=Deseo comunicarme con Jac Bolivia."
+  <a [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
     target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
       alt="Imagen whatsapp"></a>
 </div>

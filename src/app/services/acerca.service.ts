@@ -34,11 +34,20 @@ export class AcercaService {
     return this.http.get(this.url + 'acerca', { headers: headers });
   }
 
+  // Lista  de todos los usuarios de la base de datos.
+  public indexWeb(): Observable<any> {
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'); // la cabecera de conexion
+
+    // retornamos respuestas de El APIRESTFUL
+    return this.http.get(this.url + 'recoger/reflexion', { headers: headers });
+  }
+
   /**
    * updateUsuario
    */
   public updateAcerca(acerca: any, token: any): Observable<any> {
-    console.log(acerca);
+    // console.log(acerca);
 
     const json = JSON.stringify(acerca); // convertimos el objeto a json.
     const params = 'json=' + json; // La varible con la que recibe el parametro. en el API.
@@ -80,5 +89,18 @@ export class AcercaService {
 
   }
 
+
+  /**
+   * archivoImagen
+   */
+  public archivoImagen(nameImagen): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      // 'token-usuario': token // Si es un archivo mandar solo el token
+    });
+
+    return this.http.get(this.url + 'acerca/avatar/' + nameImagen, { headers: headers });
+  }
 
 }

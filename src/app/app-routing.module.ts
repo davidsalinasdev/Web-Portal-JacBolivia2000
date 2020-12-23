@@ -7,8 +7,14 @@ import { AdmicionesComponent } from './components/admiciones/admiciones.componen
 import { AcercaComponent } from './components/acerca/acerca.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { InscribeteComponent } from './components/inscribete/inscribete.component';
-import { DefensaComponent } from './components/defensa/defensa.component';
-import { AgasajoComponent } from './components/agasajo/agasajo.component';
+import { HomeCarreraComponent } from './components/home-carrera/home-carrera.component';
+import { CarreraComponent } from './components/carrera/carrera.component';
+import { HomeNoticiasComponent } from './components/home-noticias/home-noticias.component';
+import { DefensasComponent } from './components/defensas/defensas.component';
+import { AgasajosComponent } from './components/agasajos/agasajos.component';
+import { ReflexionesComponent } from './components/reflexiones/reflexiones.component';
+import { VideosComponent } from './components/videos/videos.component';
+import { FormularioInscripcionComponent } from './components/inscribete/formulario-inscripcion/formulario-inscripcion.component';
 
 
 
@@ -19,9 +25,14 @@ const routes: Routes = [
   { path: 'acerca', component: AcercaComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'inscribete', component: InscribeteComponent },
-  { path: 'defensa', component: DefensaComponent },
-  { path: 'agasajo', component: AgasajoComponent },
+  { path: 'formInscripcion', component: FormularioInscripcionComponent },
+  { path: 'reflexiones', component: ReflexionesComponent },
+  { path: 'videos/:id', component: VideosComponent },
 
+  { path: 'defensas/:id', component: DefensasComponent },
+  { path: 'carreras/:id', component: CarreraComponent },
+  { path: 'homeNoticias/:id', component: HomeNoticiasComponent },
+  { path: 'agasajos/:id', component: AgasajosComponent },
   { path: '**', component: HomeComponent }, // Cuando me equivoco de escribir la ruta.
 ];
 

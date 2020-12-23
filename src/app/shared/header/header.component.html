@@ -1,32 +1,36 @@
-<div id="carouselExampleControls" class="carousel slide animated fadeIn fast" data-ride="carousel">
+<div id="carouselExampleControls" class="carousel slide animated fadeIn fast sombra" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="img1" id="">
-        <div class="" id="">
-          <div class="display-padre  animated fadeIn fast " id="">
-            <h1>TU FUTURO ESTA CON NOSOTROS</h1>
-          </div>
+      <div *ngIf="this.imagenUno" class="img3"
+        [ngStyle]="{'background-image': 'url(' + this.urlImagen + this.imagenUno + ')'}" class="img1">
+
+        <div class="display-padre ">
+          <h1 class="animated fadeInLeftBig">{{ this.tituloUno }}</h1>
+          <!-- <h1>EL FRACASO TIENE MIL EXCUSAS, EL EXITO NO REQUIERE EXPLICACION</h1> -->
         </div>
+
       </div>
       <!-- <img src="../../../assets/img/estudiante.jpg" class="d-block w-100" alt="imagen1"> -->
     </div>
     <div class="carousel-item">
 
-      <div class="img2" id="">
-        <div class="" id="">
-          <div class="display-padre  animated fadeIn fast " id="">
-            <h1>SECRETARIADO | ADMINISTRACIÓN | CONTADURIA | INGLES | COMPUTACIÓN</h1>
-          </div>
+      <div *ngIf="this.imagenDos" class="img2"
+        [ngStyle]="{'background-image': 'url(' + this.urlImagen +this.imagenDos + ')'}">
+
+        <div class="display-padre" id="">
+          <h1 class="animated fadeInLeftBig">{{ this.tituloDos }}</h1>
         </div>
+
       </div>
     </div>
     <div class="carousel-item">
-      <div class="img3" id="">
-        <div class="" id="">
-          <div class="display-padre  animated fadeIn fast " id="">
-            <h1>LA CALIDAD ES NUESTRA LA DECISIÓN ES TUYA</h1>
-          </div>
+      <div *ngIf="this.imagenTres" class="img3"
+        [ngStyle]="{'background-image': 'url(' + this.urlImagen + this.imagenTres + ')'}">
+
+        <div class="display-padre" id="">
+          <h1 class="animated fadeInLeftBig">{{ this.tituloTres }}</h1>
         </div>
+
       </div>
     </div>
   </div>

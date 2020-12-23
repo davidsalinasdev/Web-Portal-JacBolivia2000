@@ -1,6 +1,7 @@
-<div class="container-fluid animated fadeIn fast" id="">
+<div class="container-fluid animated fadeIn fast sombra" id="">
   <div class="row" id="">
-    <div class="col-12 imagen-contacto" id="">
+    <div *ngIf="this.imagenWeb" [ngStyle]="{'background-image': 'url(' + this.urlImagen+this.imagenWeb+ ')'}"
+      class="col-12 imagen-contacto" id="">
       <div class="display-padre  animated fadeIn fast " id="">
         <h1 class="">CONTACTANOS</h1>
       </div>
@@ -20,40 +21,105 @@
   <div class="row" id="">
     <div class="detalles-footer col-12 col-md-6" id="">
       <!-- <h3>CONTACTANOS</h3> -->
-      <p><i class="fa fa-map-marker"></i> Avenida San Martin esquina Brasil Ciudad Cochabamba, Bolivia.</p>
-      <p><i class="fa fa-phone-square"></i> 4559968 - 4553737</p>
-      <p><i class="fa fa-whatsapp"></i> +591 70788896</p>
-      <p><i class="fa fa-envelope"></i> institutojacbolivia2000@gmail.com</p>
+
+      <p><i class="fa fa-map-marker"></i> {{ this.listaAcerca?.direccion }}</p>
+      <p><i class="fa fa-phone-square"></i> {{ this.listaAcerca?.telefonos }}</p>
+      <p><i class="fa fa-whatsapp"></i> {{ this.listaAcerca?.whatsapp }}</p>
+      <p><i class="fa fa-envelope"></i> {{ this.listaAcerca?.correo }}</p>
+      <p><i class="fa fa-envelope"></i><a class="correos" href="https://nikmelbo.com:2096/logout/?locale=es"
+          target="_blank"> gerencia@jacbolivia2000.com</a>
+      </p>
+      <p><i class="fa fa-envelope"></i><a class="correos" href="https://nikmelbo.com:2096/logout/?locale=es"
+          target="_blank"> info@jacbolivia2000.com</a>
+      </p>
+      <p><i class="fa fa-envelope"></i><a class="correos" href="https://nikmelbo.com:2096/logout/?locale=es"
+          target="_blank"> ventas@jacbolivia2000.com</a>
+      </p>
+      <!-- Redes sociales -->
       <!-- Redes sociales -->
       <ul class="redes-sociales-footer">
         <li><a href="https://www.facebook.com/JacBolivia"><i class="fa fa-facebook"></i></a></li>
-        <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+        <li><a
+            [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
+            target="_blank"><i class="fa fa-whatsapp"></i></a></li>
       </ul>
     </div>
     <div class="col-12 col-md-6" id="">
       <h3>¿QUIERES SER PARTE DE JAC BOLIVIA?</h3>
-      <form>
+      <form [formGroup]="this.formulario" (submit)="this.onSubmit()" novalidate>
         <div class="form-group">
-          <label for="exampleInputEmail1">Nombres y apellidos</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="nombres">Nombres y apellidos</label>
+          <input type="text" class="form-control" id="nombres" formControlName="nombres">
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="this.nombres.invalid && (this.nombres.dirty || this.nombres.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.nombres.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
+              Este campo es requerido.
+            </div>
+            <div *ngIf="this.nombres.hasError('maxlength')" class="animated fadeIn fast text-color-danger" id="">
+              Su nombre y apellido debe tener maximo 30 letras.
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Celular</label>
-          <input type="password" class="form-control" id="exampleInputPassword2">
+          <label for="celular">Celular</label>
+          <input type="text" class="form-control" id="celular" formControlName="celular">
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="this.celular.invalid && (this.celular.dirty || this.celular.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.celular.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
+              Este campo es requerido.
+            </div>
+            <div *ngIf="this.celular.hasError('pattern')" class="animated fadeIn fast text-color-danger" id="">
+              Ingrese número de celular correcto.
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Correo</label>
-          <input type="password" class="form-control" id="exampleInputPassword3">
+          <label for="correo">Email</label>
+          <input type="text" class="form-control" id="correo" formControlName="correo">
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="this.correo.invalid && (this.correo.dirty || this.correo.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.correo.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
+              Este campo es requerido.
+            </div>
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.correo.hasError('pattern')" class="animated fadeIn fast text-color-danger" id="">
+              Email incorrecto.
+            </div>
+          </div>
+        </div>
+
+        <!-- Validacion con recapchaV2 -->
+        <div class="form-group" id="">
+
+          <ngx-recaptcha2 #captchaElem [siteKey]="this.siteKey" formControlName="recaptcha">
+          </ngx-recaptcha2>
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="this.recaptcha.invalid && (this.recaptcha.dirty || this.recaptcha.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.recaptcha.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
+              Verifique que no sea un robot.
+            </div>
+          </div>
         </div>
         <p>Envia tus datos jac bolivia se comunicara con usted.</p>
-        <button type="submit" class="btn btn-secondary">QUIERO MAS INFORMACIÓN</button>
+        <button class="enviar-datos" type="submit" class="btn btn-secondary" [disabled]="this.formulario.invalid">QUIERO
+          MAS
+          INFORMACIÓN</button>
       </form>
     </div>
   </div>
 </div>
 
-<div class="container-fluid" id="">
-  <div class="row mt-5" id="">
+<!-- Mapa del instituto -->
+<div class="container-fluid animated fadeIn fast mt-5" id="">
+  <div class="row mt-1" id="">
     <div class="col-12 text-center" id="">
       <h2 class="mb-0">NUESTRA UBICACIÓN</h2>
       <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
@@ -61,15 +127,20 @@
     </div>
   </div>
   <div class="row mt-2 border" id="">
-    <div class="col-12 mapa" id="mapa">
+    <div class="col-12" id="">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8118136205512!2d-66.15330798093426!3d-17.399917894048045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373fa9f07fa49%3A0xdfe738282a404799!2sCalle%20Brasil%20%26%20Calle%20San%20Martin%2C%20Cochabamba!5e0!3m2!1ses-419!2sbo!4v1601904954117!5m2!1ses-419!2sbo"
+        width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
     </div>
   </div>
 </div>
+
 <!-- seccion whatsapp en la web -->
 <div class="container-redes animated fadeIn fast" id="">
   <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
       title="Enviar mensage por facebook" alt="Imagen facebook"></a>
-  <a href="https://api.whatsapp.com/send?phone=+591 70788896&text=Deseo comunicarme con Jac Bolivia."
+  <a [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
     target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
       alt="Imagen whatsapp"></a>
 </div>

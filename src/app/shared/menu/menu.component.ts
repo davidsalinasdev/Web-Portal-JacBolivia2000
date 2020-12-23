@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 
 
+
 // jquery en angular
 declare var $: any;
 
@@ -24,6 +25,7 @@ export class MenuComponent implements OnInit {
 
   public listaCarreras: any;
   public nuevaListaCarreras: any = [];
+  public nuevaListaWebPages: any = [];
 
   constructor(private homeServices: HomeService) { }
 
@@ -44,17 +46,20 @@ export class MenuComponent implements OnInit {
         // console.log(response);
         if (response.status === 'success') {
           this.listaCarreras = response.carrera;
-          console.log(this.listaCarreras);
+          // console.log(this.listaCarreras);
 
           this.listaCarreras.forEach(element => {
             // console.log(element);
-            if (element.estado === 1) {
+            if (element.estado === 1 && element.tipo === 'carrera') {
               this.nuevaListaCarreras.push(element);
+            }
+            if (element.estado === 1 && element.tipo === 'webPages') {
+              this.nuevaListaWebPages.push(element);
             }
           });
           this.nuevaListaCarreras = this.nuevaListaCarreras.reverse();
-          console.log(this.nuevaListaCarreras);
 
+          const chunksize = 4;
         }
       },
       errors => {

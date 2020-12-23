@@ -1,8 +1,8 @@
-.detalles-footer h3 span {
+.detalles-footer h2 span {
   color: #ffb606;
 }
 
-.detalles-footer h3 {
+.detalles-footer h2 {
   color: white;
 }
 
@@ -10,8 +10,19 @@
   color: white;
 }
 
+.correos {
+  color: #fff;
+  cursor: pointer;
+  transition-duration: 0.6s;
+}
+
+.correos:hover {
+  color: #ffb606 !important;
+}
+
 .barra {
   background-color: #0a335c;
+  padding: 1rem;
 }
 
 .lista-carreras li a {
@@ -44,6 +55,10 @@
   .datos-footer {
     flex-wrap: nowrap;
     justify-content: space-between;
+  }
+
+  .barra {
+    padding: 2rem;
   }
 }
 

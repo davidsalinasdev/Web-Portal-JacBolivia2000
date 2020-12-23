@@ -1,0 +1,56 @@
+<div class="container-fluid" id="">
+  <div class="row justify-content-center" id="">
+
+    <div class="col-12 col-xl-8" id="">
+      <div class="row" id="">
+
+        <video *ngIf="this.datoVideo && this.datoVideo.imagen" [src]="this.urlArchivos + this.datoVideo?.videos"
+          controls class="col-12 estilos-video" id="" preload [poster]="this.urlArchivos + this.datoVideo?.imagen">
+
+
+          <p>Su navegador no soporta vídeos HTML5. o actualize su navegador</p>
+
+
+        </video>
+        <div class="col-12 mt-3" id="">
+          <h3>{{ this.datoVideo?.titulo }}</h3>
+        </div>
+
+        <div class="col-12" id="">
+          <div class="ql-container ql-snow" style="border-width: 0;">
+            <div class="ql-editor parrafo" [innerHTML]="this.datoVideo?.descripcion | sanitizeHtml">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-xl-3 lista_videos" id="">
+      <div class="row" id="">
+        <div class="col-12 border-bottom" id="">
+          <button class="btn btn-danger mb-3" (click)="this.educativos()">Educativos</button>
+          <button class="btn btn-danger ml-1 mb-3" (click)="this.comercial()">Publicidad</button>
+        </div>
+
+        <div *ngFor="let item of this.listaVideos" class="col-12 mt-3 " id="">
+          <div class="row" id="">
+
+            <div class="col-6 col-sm-4  col-md-3 col-xl-6" id="">
+              <div [ngStyle]="{'background-image': 'url(' + this.urlArchivos+this.item.imagen+ ')'}"
+                class=" imagen-contacto " id="">
+                <div class="flex-tarjeta animated fadeIn fast " id="" (click)="this.reproducir(item.id,item.videos)">
+                  <span><i class="fa fa-play-circle"></i></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="titulo-tarjeta col-12 col-xl-6 mt-xl-2" id="">
+              <p> <strong>{{ item.titulo }}</strong> </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="container-fluid animated fadeIn fast" id="">
+  <div class="row" id="">
+
+    <div class="col-12 imagen-contacto"
+      [ngStyle]="{'background-image':'url('+this.urlImg+this.listaCarreras?.imagen_web+' )'}" id="">
+      <div class="display-padre  animated fadeIn fast " id="">
+        <h1 style="text-shadow: 1px 2px #353535" class="">NOTICIAS DESTACADAS</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nuestras carreras -->
+<div class="container animated fadeIn fast" id="">
+  <!-- Nuestra historia -->
+  <div class="row mt-5" id="">
+    <div class="col-12 text-center" id="">
+      <h2 class="mb-0">{{ (this.listaCarreras?.titulo)}} </h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+      </P>
+    </div>
+    <div class="col-12" id="">
+      <div class="row" id="">
+        <div *ngIf="this.listaCarreras?.imagen" class="col-12 col-md-6" id="">
+          <div [ngStyle]="{'background-image':'url('+this.url+'noticias/getImagen/' +this.listaCarreras?.imagen+' )'}"
+            class="imagen-principal" id="">
+          </div>
+          <P class="text-dark mt-2">Publicado el {{ this.listaCarreras.fecha }}</P>
+        </div>
+        <div class="col-12 col-md-6 publicacion" id="">
+          <!-- <p style="white-space: pre-line;">{{ this.listaCarreras?.descripcion }}</p> -->
+          <div class="ql-container ql-snow" style="border-width: 0;">
+            <div class="ql-editor parrafo" [innerHTML]="this.listaCarreras?.descripcion | sanitizeHtml">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- fotografias -->
+    <div class="col-12" id="">
+      <!-- Nuestra historia -->
+      <div class="row mt-5" id="">
+        <div class="col-12 text-center" id="">
+          <h2 class="mb-0"> GALERIA DE IMÁGENES </h2>
+          <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>
+          </P>
+        </div>
+      </div>
+
+
+      <!-- Galeria de imagenes -->
+      <div class="col-12 animated fadeIn fast" id="hola">
+        <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
+        <!-- <img src="./../../../assets/img/estuden2.jpg" alt=""> -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+          <div class="carousel-inner">
+
+
+            <div *ngFor="let item of this.nuevaListaImagenes, let i=index"
+              class="carousel-item caja  borde-img {{ (i===0)? 'active':'' }}"
+              [ngStyle]="{'background-image':'url('+this.url+'noticias/getImagen/' +item?.imagen+' )'}">
+              <!-- <img src="../../../assets/img/promo1.jpg" class="" alt="..."> -->
+            </div>
+
+
+          </div>
+          <ol class="carousel-indicators fotos-carrusel m-0">
+
+            <li *ngFor="let item of this.nuevaListaImagenes, let i=index" data-target="#carouselExampleIndicators"
+              attr.data-slide-to="{{ i }}" class="">
+              <img [src]="this.url+'noticias/getImagen/' +item?.imagen" class="d-block w-100 borde-img" alt="...">
+            </li>
+
+          </ol>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- seccion whatsapp en la web -->
+<div class="container-redes animated fadeIn fast" id="">
+  <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
+      title="Enviar mensage por facebook" alt="Imagen facebook"></a>
+  <a href="https://api.whatsapp.com/send?phone=+591 70788896&text=Deseo comunicarme con Jac Bolivia."
+    target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
+      alt="Imagen whatsapp"></a>
+</div>
+<!-- fin seccion whatsapp en la web -->

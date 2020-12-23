@@ -1,29 +1,38 @@
 <div class="container-fluid animated fadeIn fast mt-4" id="">
-  <footer class="row p-5 barra" id="">
-    <div class="detalles-footer col-12 col-md-4" id="">
-      <h3>SOBRE <span>JAC BOLIVIA 2000</span></h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quaerat nihil ipsa ratione nobis ipsum
-        doloremque
-        culpa. Deleniti molestias amet beatae quidem soluta iste, iusto vel sunt culpa commodi atque!</p>
+  <footer class="row barra" id="">
+    <div class="detalles-footer col col-md-4" id="">
+      <h2>SOBRE <span>JAC BOLIVIA 2000</span></h2>
+      <p style="white-space:pre-line;">{{ this.listaAcerca?.sobre_jac }}</p>
     </div>
-    <div class="detalles-footer col-12 col-md-4" id="">
-      <h3>CONTENIDO</h3>
+    <div class="detalles-footer col col-md-4" id="">
+      <h2>CONTENIDO</h2>
       <ul class="lista-carreras">
-        <li> <a href=""> INICIO</a></li>
-        <li> <a href=""> ADMICIONES</a></li>
-        <li> <a href=""> ACERCA DE JAC BOLIVIA</a></li>
-        <li> <a href=""> CONTACTO</a></li>
+        <li> <a [routerLink]="[ '/home']"> INICIO</a></li>
+        <li> <a [routerLink]="[ '/inscribete']"> INSCRIBETE</a></li>
+        <li> <a [routerLink]="[ '/acerca']"> ACERCA DE JAC BOLIVIA</a></li>
+        <li> <a [routerLink]="[ '/contacto']"> CONTACTO</a></li>
       </ul>
     </div>
-    <div class="detalles-footer col-12 col-md-4" id="">
-      <h3>CONTACTANOS</h3>
-      <p><i class="fa fa-map-marker"></i> Avenida San Martin esquina Brasil Ciudad Cochabamba, Bolivia.</p>
-      <p><i class="fa fa-phone-square"></i> 4559968 - 4553737</p>
-      <p><i class="fa fa-envelope"></i> institutojacbolivia2000@gmail.com</p>
+    <div class="detalles-footer col col-md-4" id="">
+      <h2>CONTACTANOS</h2>
+      <p><i class="fa fa-map-marker"></i> {{ this.listaAcerca?.direccion }} </p>
+      <p><i class="fa fa-phone-square"></i> {{ this.listaAcerca?.telefonos }}</p>
+      <p><i class="fa fa-envelope"></i> {{ this.listaAcerca?.correo }}</p>
+      <p><i class="fa fa-envelope"></i><a class="correos" href="https://nikmelbo.com:2096/logout/?locale=es"
+          target="_blank"> gerencia@jacbolivia2000.com</a>
+      </p>
+      <p><i class="fa fa-envelope"></i><a class="correos" href="https://nikmelbo.com:2096/logout/?locale=es"
+          target="_blank"> info@jacbolivia2000.com</a>
+      </p>
+      <p><i class="fa fa-envelope"></i><a class="correos" href="https://nikmelbo.com:2096/logout/?locale=es"
+          target="_blank"> ventas@jacbolivia2000.com</a>
+      </p>
       <!-- Redes sociales -->
       <ul class="redes-sociales-footer">
         <li><a href="https://www.facebook.com/JacBolivia"><i class="fa fa-facebook"></i></a></li>
-        <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+        <li><a
+            [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
+            target="_blank"><i class="fa fa-whatsapp"></i></a></li>
       </ul>
     </div>
     <!-- </div> -->
@@ -31,7 +40,7 @@
   <div class="row derechos" id="">
     <div class="col-12" id="">
       <p class="text-center mb-0 text-white p-4 ">Todos los derechos Reservados JAC BOLIVIA 2000 © desarrollado por
-        www.nikmel-bo.com</p>
+        <a href="http://nikmelbo.com" target="_blank">www.nikmelbo.com</a></p>
     </div>
   </div>
 </div>

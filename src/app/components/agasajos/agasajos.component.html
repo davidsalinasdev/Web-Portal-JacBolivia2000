@@ -1,0 +1,125 @@
+<!-- Titulo principal -->
+<div class="container-fluid animated fadeIn fast sombra" id="">
+  <div class="row" id="">
+    <div *ngIf="this.imagenWeb" [ngStyle]="{'background-image': 'url(' + this.urlImagen+this.imagenWeb+ ')'}"
+      class="col-12 imagen-contacto" id="">
+      <div class="display-padre  animated fadeIn fast " id="">
+        <h1 class="">AGASAJOS DE GRADO</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Subtitulo -->
+<!--Ofertas -->
+<div class="container animated fadeIn fast" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 text-center" id="">
+      <h2 class="mb-0">BUSCAR AGASAJOS DE GRADO POR FECHA</h2>
+      <P class="circulos"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i></P>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid animated fadeIn fast" id="">
+  <div class="row mt-5 justify-content-center" id="">
+    <div class="col-8 uk-border-rounded" id="">
+      <form [formGroup]="this.formulario" (submit)="this.onSubmit()" novalidate>
+        <div class="form-group" id="">
+          <input class="form-control" type="date" placeholder="(Dia/Mes/Año) Ejemplo: 10/02/2020"
+            formControlName="buscar">
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="this.buscar.invalid && (this.buscar.dirty || this.buscar.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.buscar.hasError('required')" class="animated fadeIn fast text-danger" id="">
+              Este campo es requerido.
+            </div>
+          </div>
+        </div>
+        <div class="boton-buscar" id="">
+          <button type="submit" class="btn btn-dark btn-lg" [disabled]="this.formulario.invalid">BUSCAR</button>
+        </div>
+      </form>
+      <!-- Busquedas -->
+      <div *ngIf="this.buscarNoticias" [ngClass]="this.intervalo" id="">
+        <div class="alert alert-danger mt-2" role="alert">
+          <h1 class="alert-heading"> No existe ningun resultado!.. Intente con otra fecha</h1>
+          <hr>
+          <p class="mb-0">Sistema de busquedas Jac Bolivia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mesaje de succes de buscar defensas -->
+<div class="container-fluid success-buscar" id="">
+  <div class="row">
+    <div class="col-12" id="">
+      <div *ngIf="this.buscarSuccess" [ngClass]="this.intervaloSuccess" id="">
+        <div class="alert alert-success mt-2 p-5" role="alert">
+          <h1 class="alert-heading"> ¡Se encontraron resultados con exito!</h1>
+          <hr>
+          <p class="mb-0">Sistema de busquedas Jac Bolivia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Mesaje de succes de buscar defensas -->
+
+<!--Busqueda defensa-->
+<div class="container-fluid animated fadeIn fast" [ngClass]="this.estiloCerrar" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 flex-noticias" id="">
+      <div *ngFor="let item of this.listaSuccess"
+        [ngStyle]="{'background-image':'url('+this.urlImagen+this.item.imagen+' )'}" class="imagen-principal" id="">
+        <div class="datos-noticias p-2" id="">
+          <h3 class="mb-1">{{ item.titulo }}</h3>
+          <P class="">Publicado el{{ item.fecha }}</P>
+          <button [routerLink]="['/homeNoticias',item.id]">VER MAS</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Subtitulo -->
+<!--Ofertas -->
+<div class="container animated fadeIn fast" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 text-center" id="">
+      <h2 class="mb-0">LISTA DE AGASAJOS DE GRADO</h2>
+      <P class="circulos mb-0"><i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i><i
+          class="fa fa-circle-o"></i></P>
+    </div>
+  </div>
+</div>
+<!-- Subtitulo -->
+<!--Defensas -->
+<div class="container-fluid animated fadeIn fast" id="">
+  <div class="row mt-5" id="">
+    <div class="col-12 flex-noticias" id="">
+      <div *ngFor="let item of this.nuevaListaNoticias"
+        [ngStyle]="{'background-image':'url('+this.urlImagen+this.item.imagen+' )'}" class="imagen-principal" id="">
+        <div class="datos-noticias p-2" id="">
+          <h3 class="mb-1">{{ item.titulo }}</h3>
+          <P class="">Publicado el{{ item.fecha }}</P>
+          <button [routerLink]="['/homeNoticias',item.id]">VER MAS</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- seccion whatsapp en la web -->
+<div class="container-redes animated fadeIn fast" id="">
+  <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
+      title="Enviar mensage por facebook" alt="Imagen facebook"></a>
+  <a [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
+    target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
+      alt="Imagen whatsapp"></a>
+</div>
+<!-- fin seccion whatsapp en la web -->
