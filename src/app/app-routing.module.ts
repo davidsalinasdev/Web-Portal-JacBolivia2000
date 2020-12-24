@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'acerca', component: AcercaComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'inscribete', component: InscribeteComponent },
-  { path: 'formInscripcion', component: FormularioInscripcionComponent },
+  { path: 'inscripcion', component: FormularioInscripcionComponent },
   { path: 'reflexiones', component: ReflexionesComponent },
   { path: 'videos/:id', component: VideosComponent },
 

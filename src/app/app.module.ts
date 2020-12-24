@@ -22,6 +22,12 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 // Mensajes de notificacion
 import { ToastrModule } from 'ngx-toastr';
 
+// Para subir archivos
+import { AngularFileUploaderModule } from "angular-file-uploader";
+
+// Angular material
+import { MaterialModule } from './material/material.module';
+
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './shared/menu/menu.component';
@@ -43,6 +49,7 @@ import { SanitizeHtmlPipe } from './pipes/SanitizeHtmlPipe.pipe';
 import { ReflexionesComponent } from './components/reflexiones/reflexiones.component';
 import { VideosComponent } from './components/videos/videos.component';
 import { FormularioInscripcionComponent } from './components/inscribete/formulario-inscripcion/formulario-inscripcion.component';
+
 
 
 
@@ -81,6 +88,8 @@ import { FormularioInscripcionComponent } from './components/inscribete/formular
         QuillModule.forRoot(),
         NgxCaptchaModule,
         ToastrModule.forRoot(), // ToastrModule added
+        AngularFileUploaderModule,
+        MaterialModule,
 
 
     ],

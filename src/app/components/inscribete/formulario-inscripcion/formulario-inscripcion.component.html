@@ -1,1 +1,274 @@
-<p>formulario-inscripcion works!</p>
+<div class="container-fluid animated fadeIn fast" id="">
+  <div class="row contenedor-formulario justify-content-center" id="">
+    <div class="col-md-8 p-4 formulario" id="">
+      <h2 class="text-center">SOLICITUD DE INSCRIPCIÓN ESTUDIANTES NUEVOS</h2>
+      <h1 class="text-center">INGRESO DE DATOS</h1>
+      <p class="text-center">POR FAVOR REGISTRA CORRECTAMENTE TUS DATOS</p>
+      <hr>
+      <h1 class="">INFORMACIÓN PERSONAL</h1>
+      <form [formGroup]="this.formulario" class="mt-4">
+        <div class="form-row" id="">
+          <div class="form-group col-md-6">
+            <label>Doc. de identidad<span class="text-danger"> *</span></label><br>
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Número de carnet</mat-label>
+              <input matInput placeholder="Carnet" formControlName="carnet">
+
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.carnet.invalid && (this.carnet.dirty || this.carnet.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.carnet.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.carnet.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+                El carnet tiene que tener maximo 15 letras.
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <label>Ciudad<span class="text-danger"> *</span></label><br>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Seleccione una ciudad.</mat-label>
+              <mat-select formControlName="ciudad">
+                <mat-option *ngFor="let ciudad of this.ciudades" [value]="ciudad.value">
+                  {{ciudad.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.ciudad.invalid && (this.ciudad.dirty || this.ciudad.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.ciudad.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-4" id="">
+            <label>Tipo de documento<span class="text-danger"> *</span></label><br>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Seleccione un tipo de documento.</mat-label>
+              <mat-select formControlName="tipoDocumento">
+                <mat-option *ngFor="let tipo of this.tiposDocumentos" [value]="tipo.value">
+                  {{tipo.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.tipoDocumento.invalid && (this.tipoDocumento.dirty || this.tipoDocumento.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.tipoDocumento.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" id="">
+          <label>Nombre (s) Completo<span class="text-danger"> *</span></label><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Nombre (s)</mat-label>
+            <input matInput placeholder="Ingrese su (s) Nombre (s)" formControlName="nombres">
+
+          </mat-form-field>
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="this.nombres.invalid && (this.nombres.dirty || this.nombres.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.nombres.hasError('required')" class="animated fadeIn fast text-danger" id="">
+              Este campo es requerido.
+            </div>
+            <div *ngIf="this.nombres.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+              El nombres tiene que tener maximo 20 letras.
+            </div>
+            <div *ngIf="this.nombres.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+              Los nombres deben empezar con Mayuscula y luego minusculas, no se acepta números
+            </div>
+          </div>
+        </div>
+        <div class="form-group" id="">
+          <label for="">Apellido Paterno<span class="text-danger"> *</span></label>
+          <input type="text" class="form-control" placeholder="Apellido Paterno">
+        </div>
+        <div class="form-group" id="">
+          <label for="">Apellido Materno</label>
+          <input type="text" class="form-control" placeholder="Apellido Materno">
+        </div>
+        <div class="form-row" id="">
+          <div class="form-group col-md-5" id="">
+            <label for="">Teléfono celular<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Teléfono">
+          </div>
+          <div class="form-group col-md-7" id="">
+            <label for="">Email<span class="text-danger"> *</span></label>
+            <input type="email" class="form-control" placeholder="example@ejemplo.com">
+          </div>
+        </div>
+
+        <div class="form-group" id="">
+          <label>Documento de identidad<span class="text-danger"> *</span></label><br>
+        </div>
+
+
+        <div class="form-row" id="">
+
+          <div class="form-group col-md-6" id="">
+            <label for="" class="text-info">Anverso<span class="text-danger"> *</span></label>
+            <angular-file-uploader [config]="afuConfig">
+            </angular-file-uploader>
+          </div>
+          <div class="form-group col-md-6" id="">
+            <label for="" class="text-info">Reverso<span class="text-danger"> *</span></label>
+            <angular-file-uploader [config]="afuConfig">
+            </angular-file-uploader>
+          </div>
+        </div>
+
+        <div class="form-group mt-4" id="">
+          <label for="">Titulo de Bachiller<span class="text-danger"> *</span></label>
+          <angular-file-uploader [config]="afuConfig">
+          </angular-file-uploader>
+        </div>
+        <br>
+        <hr>
+        <h1 class="">DATOS DEL PADRE/MADRE/TUTOR</h1>
+        <div class="form-row mt-4" id="">
+          <div class="form-group col-md-6" id="">
+            <label for="">Nombre del padre/madre/tutor<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Nombre Completo">
+          </div>
+          <div class="form-group col-md-6" id="">
+            <label for="">Profesión o lugar donde trabaja<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Profesión">
+          </div>
+        </div>
+
+        <div class="form-row" id="">
+          <div class="form-group col-md-4" id="">
+            <label for="">CI/Pasaporte<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Carnet/Pasaporte">
+          </div>
+          <div class="form-group col-md-4" id="">
+            <label for="">Telefono<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Telefono">
+          </div>
+          <div class="form-group col-md-4" id="">
+            <label for="">Email<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="form-row" id="">
+          <div class="form-group col-md-7" id="">
+            <label for="">Dirección<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Dirección">
+          </div>
+          <div class="form-group col-md-5" id="">
+            <label for="">Zona<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" placeholder="Zona">
+          </div>
+        </div>
+        <br>
+        <hr>
+        <h1 class="">INFORMACIÓN ACADEMICA</h1>
+        <div class="form-row" id="">
+          <div class="form-group col-md-6">
+            <label for="">Carrera<span class="text-danger"> *</span></label>
+            <select class="custom-select">
+
+              <option value="laPaz">LP</option>
+              <option value="cochabamba">CB</option>
+              <option value="santaCruz">SC</option>
+              <option value="tarija">TJ</option>
+              <option value="potosi">PT</option>
+              <option value="chuquisaca">CH</option>
+              <option value="oruro">OR</option>
+              <option value="beni">BE</option>
+              <option value="pando">PD</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="Horarios">Horarios<span class="text-danger"> *</span></label>
+            <div class="d-flex" id="">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio1">Mañana</label>
+              </div>
+              <div class="custom-control custom-radio ml-4">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2">Tarde</label>
+              </div>
+              <div class="custom-control custom-radio ml-4">
+                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio3">Noche</label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-row mt-4" id="">
+          <div class="form-group col-md-6">
+            <label for="Horarios">Elija una Forma de Pago<span class="text-danger"> *</span></label>
+            <div class="d-flex" id="">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio1">Pago Total de la Carrera</label>
+              </div>
+              <div class="custom-control custom-radio ml-4">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2">Pago Anual</label>
+              </div>
+              <div class="custom-control custom-radio ml-4">
+                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio3">Pago Semestral</label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group mt-4" id="">
+          <label for="">Detalle del Costo de la Carrera</label>
+        </div>
+        <div class="form-group mt-4" id="">
+          <label for="">Comprobante de Pago<span class="text-danger"> *</span></label>
+          <angular-file-uploader [config]="afuConfig">
+          </angular-file-uploader>
+        </div>
+
+        <!-- Validacion con recapchaV2 -->
+        <div class="form-group" id="">
+
+          <ngx-recaptcha2 #captchaElem [siteKey]="this.siteKey" formControlName="recaptcha">
+          </ngx-recaptcha2>
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <!-- <div *ngIf="this.recaptcha.invalid && (this.recaptcha.dirty || this.recaptcha.touched)"> -->
+          <!-- Errores con expresiones regulares -->
+          <!-- <div *ngIf="this.recaptcha.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
+               Verifique que no sea un robot.
+             </div>
+           </div> -->
+        </div>
+
+        <button class="btn btn-success btn-lg mt-4" [routerLink]="[ '/inscripcion']">ENVIAR SOLICITUD DE INSCRIPCIÓN <i
+            class="fa fa-chevron-right"></i> </button>
+        <hr>
+        <p>Los campos marcados con <span class="text-danger"> *</span> son obligatorios.</p>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- seccion whatsapp en la web -->
+<div class="container-redes animated fadeIn fast" id="">
+  <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
+      title="Enviar mensage por facebook" alt="Imagen facebook"></a>
+  <a [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
+    target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
+      alt="Imagen whatsapp"></a>
+</div>
+<!-- fin seccion whatsapp en la web -->

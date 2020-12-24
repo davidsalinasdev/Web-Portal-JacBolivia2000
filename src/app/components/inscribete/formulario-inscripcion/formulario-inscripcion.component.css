@@ -1,0 +1,16 @@
+.contenedor-formulario {
+  margin-top: 10rem;
+}
+
+.formulario {
+  /* border: 0.1rem solid#87949e; */
+  border-radius: 0.5rem;
+
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  background-color: #ffffffff
+}
+
+.example-full-width {
+  width: 100%;
+}
