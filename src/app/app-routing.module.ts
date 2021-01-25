@@ -15,6 +15,7 @@ import { AgasajosComponent } from './components/agasajos/agasajos.component';
 import { ReflexionesComponent } from './components/reflexiones/reflexiones.component';
 import { VideosComponent } from './components/videos/videos.component';
 import { FormularioInscripcionComponent } from './components/inscribete/formulario-inscripcion/formulario-inscripcion.component';
+import { GraciasComponent } from './components/inscribete/gracias/gracias.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'inscribete', component: InscribeteComponent },
   { path: 'inscripcion', component: FormularioInscripcionComponent },
+  { path: 'gracias', component: GraciasComponent },
   { path: 'reflexiones', component: ReflexionesComponent },
   { path: 'videos/:id', component: VideosComponent },
 

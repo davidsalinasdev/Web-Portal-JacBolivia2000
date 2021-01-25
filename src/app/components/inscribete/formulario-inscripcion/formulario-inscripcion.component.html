@@ -1,23 +1,25 @@
 <div class="container-fluid animated fadeIn fast" id="">
   <div class="row contenedor-formulario justify-content-center" id="">
-    <div class="col-md-8 p-4 formulario" id="">
+    <div class="col-lg-8 p-4 formulario" id="">
       <h2 class="text-center">SOLICITUD DE INSCRIPCIÓN ESTUDIANTES NUEVOS</h2>
       <h1 class="text-center">INGRESO DE DATOS</h1>
       <p class="text-center">POR FAVOR REGISTRA CORRECTAMENTE TUS DATOS</p>
-      <hr>
+      <hr />
       <h1 class="">INFORMACIÓN PERSONAL</h1>
-      <form [formGroup]="this.formulario" class="mt-4">
+      <form [formGroup]="this.formulario" class="mt-4" (submit)="this.onSubmit($event)">
         <div class="form-row" id="">
-          <div class="form-group col-md-6">
-            <label>Doc. de identidad<span class="text-danger"> *</span></label><br>
-            <mat-form-field appearance="outline" style="width: 100%;">
+          <div class="form-group col-md-5">
+            <label>Doc. de identidad<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Número de carnet</mat-label>
-              <input matInput placeholder="Carnet" formControlName="carnet">
-
+              <input matInput placeholder="Carnet" formControlName="carnet" />
             </mat-form-field>
             <!-- Validacion -->
             <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-            <div *ngIf="this.carnet.invalid && (this.carnet.dirty || this.carnet.touched)">
+            <div *ngIf="
+                this.carnet.invalid &&
+                (this.carnet.dirty || this.carnet.touched)
+              ">
               <!-- Errores con expresiones regulares -->
               <div *ngIf="this.carnet.hasError('required')" class="animated fadeIn fast text-danger" id="">
                 Este campo es requerido.
@@ -27,19 +29,22 @@
               </div>
             </div>
           </div>
-          <div class="form-group col-md-2">
-            <label>Ciudad<span class="text-danger"> *</span></label><br>
+          <div class="form-group col-md-3">
+            <label>Ciudad<span class="text-danger"> *</span></label><br />
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Seleccione una ciudad.</mat-label>
               <mat-select formControlName="ciudad">
                 <mat-option *ngFor="let ciudad of this.ciudades" [value]="ciudad.value">
-                  {{ciudad.viewValue}}
+                  {{ ciudad.viewValue }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <!-- Validacion -->
             <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-            <div *ngIf="this.ciudad.invalid && (this.ciudad.dirty || this.ciudad.touched)">
+            <div *ngIf="
+                this.ciudad.invalid &&
+                (this.ciudad.dirty || this.ciudad.touched)
+              ">
               <!-- Errores con expresiones regulares -->
               <div *ngIf="this.ciudad.hasError('required')" class="animated fadeIn fast text-danger" id="">
                 Este campo es requerido.
@@ -47,18 +52,21 @@
             </div>
           </div>
           <div class="form-group col-md-4" id="">
-            <label>Tipo de documento<span class="text-danger"> *</span></label><br>
+            <label>Tipo de documento<span class="text-danger"> *</span></label><br />
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Seleccione un tipo de documento.</mat-label>
               <mat-select formControlName="tipoDocumento">
                 <mat-option *ngFor="let tipo of this.tiposDocumentos" [value]="tipo.value">
-                  {{tipo.viewValue}}
+                  {{ tipo.viewValue }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <!-- Validacion -->
             <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-            <div *ngIf="this.tipoDocumento.invalid && (this.tipoDocumento.dirty || this.tipoDocumento.touched)">
+            <div *ngIf="
+                this.tipoDocumento.invalid &&
+                (this.tipoDocumento.dirty || this.tipoDocumento.touched)
+              ">
               <!-- Errores con expresiones regulares -->
               <div *ngIf="this.tipoDocumento.hasError('required')" class="animated fadeIn fast text-danger" id="">
                 Este campo es requerido.
@@ -66,16 +74,20 @@
             </div>
           </div>
         </div>
+
+        <!-- Nombres del estudiante -->
         <div class="form-group" id="">
-          <label>Nombre (s) Completo<span class="text-danger"> *</span></label><br>
+          <label>Nombre (s)<span class="text-danger"> *</span></label><br />
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Nombre (s)</mat-label>
-            <input matInput placeholder="Ingrese su (s) Nombre (s)" formControlName="nombres">
-
+            <input matInput placeholder="Nombre (s)" formControlName="nombres" />
           </mat-form-field>
           <!-- Validacion -->
           <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-          <div *ngIf="this.nombres.invalid && (this.nombres.dirty || this.nombres.touched)">
+          <div *ngIf="
+              this.nombres.invalid &&
+              (this.nombres.dirty || this.nombres.touched)
+            ">
             <!-- Errores con expresiones regulares -->
             <div *ngIf="this.nombres.hasError('required')" class="animated fadeIn fast text-danger" id="">
               Este campo es requerido.
@@ -84,162 +96,401 @@
               El nombres tiene que tener maximo 20 letras.
             </div>
             <div *ngIf="this.nombres.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
-              Los nombres deben empezar con Mayuscula y luego minusculas, no se acepta números
+              Los nombres deben empezar con Mayuscula y luego minusculas, no se
+              acepta números
             </div>
           </div>
         </div>
+
+        <!-- Apellido paterno -->
         <div class="form-group" id="">
-          <label for="">Apellido Paterno<span class="text-danger"> *</span></label>
-          <input type="text" class="form-control" placeholder="Apellido Paterno">
+          <label>Paterno<span class="text-danger"> *</span></label><br />
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Paterno</mat-label>
+            <input matInput placeholder="Apellido Paterno" formControlName="paterno" />
+          </mat-form-field>
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="
+              this.paterno.invalid &&
+              (this.paterno.dirty || this.paterno.touched)
+            ">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.paterno.hasError('required')" class="animated fadeIn fast text-danger" id="">
+              Este campo es requerido.
+            </div>
+            <div *ngIf="this.paterno.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+              El apellido paterno tiene que tener maximo 20 Caracteres.
+            </div>
+            <div *ngIf="this.paterno.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+              El apellido deben empezar con Mayuscula y luego minusculas, no se
+              acepta números.
+            </div>
+          </div>
         </div>
+        <!-- Apellido Materno -->
         <div class="form-group" id="">
-          <label for="">Apellido Materno</label>
-          <input type="text" class="form-control" placeholder="Apellido Materno">
+          <label>Materno<span class="text-danger"> *</span></label><br />
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Materno</mat-label>
+            <input matInput placeholder="Apellido Materno" formControlName="materno" />
+          </mat-form-field>
+          <!-- Validacion -->
+          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+          <div *ngIf="
+              this.materno.invalid &&
+              (this.materno.dirty || this.materno.touched)
+            ">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.materno.hasError('required')" class="animated fadeIn fast text-danger" id="">
+              Este campo es requerido.
+            </div>
+            <div *ngIf="this.materno.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+              El apellido materno tiene que tener maximo 20 Caracteres.
+            </div>
+            <div *ngIf="this.materno.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+              El apellido deben empezar con Mayuscula y luego minusculas, no se
+              acepta números.
+            </div>
+          </div>
         </div>
         <div class="form-row" id="">
           <div class="form-group col-md-5" id="">
-            <label for="">Teléfono celular<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Teléfono">
+            <label>Celular<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Celular</mat-label>
+              <input matInput placeholder="Número de celular" formControlName="celular" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.celular.invalid &&
+                (this.celular.dirty || this.celular.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.celular.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.celular.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+                Se acepta solo numeros entres 7 y 11 digitos.
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-7" id="">
-            <label for="">Email<span class="text-danger"> *</span></label>
-            <input type="email" class="form-control" placeholder="example@ejemplo.com">
+            <label>Correo electronico<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.email.invalid && (this.email.dirty || this.email.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.email.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.email.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+                Email no valido.
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="form-group" id="">
-          <label>Documento de identidad<span class="text-danger"> *</span></label><br>
+          <label>Documento de identidad (Carnet)<span class="text-danger">
+              *</span></label><br />
         </div>
-
 
         <div class="form-row" id="">
 
+          <!-- Anverso del carnet -->
           <div class="form-group col-md-6" id="">
-            <label for="" class="text-info">Anverso<span class="text-danger"> *</span></label>
-            <angular-file-uploader [config]="afuConfig">
-            </angular-file-uploader>
+            <label for="anverso" class="text-info">Anverso<span class="text-danger"> *</span></label>
+            <input type="file" class="d-none" id="anverso" (change)="onPhotoSelectedAnverso($event)" accept="image/jpeg"
+              #photoInputAnverso>
+            <br>
+            <button type="button" class="btn btn-info" (click)="photoInputAnverso.click()">Subir imagen</button>
+            <span class="ml-2">{{ this.nameFileAnverso }}</span>
           </div>
+          <!-- Recverso del carnet -->
           <div class="form-group col-md-6" id="">
-            <label for="" class="text-info">Reverso<span class="text-danger"> *</span></label>
-            <angular-file-uploader [config]="afuConfig">
-            </angular-file-uploader>
+            <label for="reverso" class="text-info">Reverso<span class="text-danger"> *</span></label>
+            <input type="file" class="d-none" id="reverso" (change)="onPhotoSelectedReverso($event)" accept="image/jpeg"
+              #photoInputReverso>
+            <br>
+            <button type="button" class="btn btn-info" (click)="photoInputReverso.click()">Subir imagen</button>
+            <span class="ml-2">{{ this.nameFileReverso }}</span>
           </div>
         </div>
-
+        <!-- Certificado de nacimiento -->
         <div class="form-group mt-4" id="">
-          <label for="">Titulo de Bachiller<span class="text-danger"> *</span></label>
-          <angular-file-uploader [config]="afuConfig">
-          </angular-file-uploader>
+          <label for="certificado">Certificado de nacimiento<span class="text-danger"> *</span></label>
+          <input type="file" class="d-none" id="certificado" (change)="onPhotoSelectedCertificado($event)"
+            accept="image/jpeg" #photoInputCertificado>
+          <br>
+          <button type="button" class="btn btn-info" (click)="photoInputCertificado.click()">Subir imagen</button>
+          <span class="ml-2">{{ this.nameFileCertificado }}</span>
         </div>
-        <br>
-        <hr>
+        <!--  Titulo de bachiller -->
+        <div class="form-group mt-4" id="">
+          <label for="titulo">Titulo de Bachiller<span class="text-danger"> *</span></label>
+          <input type="file" class="d-none" id="titulo" (change)="onPhotoSelectedTitulo($event)" accept="image/jpeg"
+            #photoInputTitulo>
+          <br>
+          <button type="button" class="btn btn-info" (click)="photoInputTitulo.click()">Subir imagen</button>
+          <span class="ml-2">{{ this.nameFileTitulo }}</span>
+        </div>
+        <br />
+        <hr />
         <h1 class="">DATOS DEL PADRE/MADRE/TUTOR</h1>
         <div class="form-row mt-4" id="">
           <div class="form-group col-md-6" id="">
-            <label for="">Nombre del padre/madre/tutor<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Nombre Completo">
+            <label>Nombre del padre/madre o tutor<span class="text-danger">
+                *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Nombre (s)</mat-label>
+              <input matInput placeholder="Nombre (s)" formControlName="nombresTutor" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.nombresTutor.invalid &&
+                (this.nombresTutor.dirty || this.nombresTutor.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.nombresTutor.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.nombresTutor.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+                El nombres tiene que tener maximo 50 Caracteres.
+              </div>
+              <div *ngIf="this.nombresTutor.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+                Los nombres deben empezar con Mayuscula y luego minusculas, no
+                se acepta números.
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-6" id="">
-            <label for="">Profesión o lugar donde trabaja<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Profesión">
+            <label>Profesión o lugar donde trabaja<span class="text-danger">
+                *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Profesión</mat-label>
+              <input matInput placeholder="profesión" formControlName="profesion" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.profesion.invalid &&
+                (this.profesion.dirty || this.profesion.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.profesion.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.profesion.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+                El nombres tiene que tener maximo 50 Caracteres.
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="form-row" id="">
           <div class="form-group col-md-4" id="">
-            <label for="">CI/Pasaporte<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Carnet/Pasaporte">
+            <label>CI/Pasaporte<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Número de Carnet o Pasaporte</mat-label>
+              <input matInput placeholder="Carnet/Pasaporte" formControlName="carnetPasaporte" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.carnetPasaporte.invalid &&
+                (this.carnetPasaporte.dirty || this.carnetPasaporte.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.carnetPasaporte.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.carnetPasaporte.hasError('maxlength')" class="animated fadeIn fast text-danger" id="">
+                El carnet o Pàsaporte tiene que tener maximo 15 letras.
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-4" id="">
-            <label for="">Telefono<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Telefono">
+            <label>Telefono<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Telefono</mat-label>
+              <input matInput placeholder="Número de telefono" formControlName="telefono" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.telefono.invalid &&
+                (this.telefono.dirty || this.telefono.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.telefono.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.telefono.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+                Se acepta solo numeros entres 7 y 11 digitos.
+              </div>
+            </div>
           </div>
+
           <div class="form-group col-md-4" id="">
-            <label for="">Email<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Email">
+            <label>Email<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="emailTutor" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.emailTutor.invalid &&
+                (this.emailTutor.dirty || this.emailTutor.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.emailTutor.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+              <div *ngIf="this.emailTutor.hasError('pattern')" class="animated fadeIn fast text-danger" id="">
+                Email no valido.
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="form-row" id="">
           <div class="form-group col-md-7" id="">
-            <label for="">Dirección<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Dirección">
+            <label>Dirección<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Dirección</mat-label>
+              <input matInput placeholder="Dirección" formControlName="direccion" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.direccion.invalid &&(this.direccion.dirty || this.direccion.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.direccion.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-5" id="">
-            <label for="">Zona<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" placeholder="Zona">
+            <label>Zona<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Zona</mat-label>
+              <input matInput placeholder="Zona" formControlName="zona" />
+            </mat-form-field>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.zona.invalid && (this.zona.dirty || this.zona.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.zona.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+            </div>
           </div>
         </div>
-        <br>
-        <hr>
+        <br />
+        <hr />
         <h1 class="">INFORMACIÓN ACADEMICA</h1>
         <div class="form-row" id="">
           <div class="form-group col-md-6">
-            <label for="">Carrera<span class="text-danger"> *</span></label>
-            <select class="custom-select">
+            <label>Carrera<span class="text-danger"> *</span></label><br />
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Seleccione una carrera</mat-label>
+              <mat-select formControlName="carrera" (selectionChange)="onChange($event)">
+                <mat-option *ngFor="let carrera of this.carreras" [value]="carrera.value">
+                  {{ carrera.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-              <option value="laPaz">LP</option>
-              <option value="cochabamba">CB</option>
-              <option value="santaCruz">SC</option>
-              <option value="tarija">TJ</option>
-              <option value="potosi">PT</option>
-              <option value="chuquisaca">CH</option>
-              <option value="oruro">OR</option>
-              <option value="beni">BE</option>
-              <option value="pando">PD</option>
-            </select>
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="
+                this.carrera.invalid &&
+                (this.carrera.dirty || this.carrera.touched)
+              ">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.carrera.hasError('required')" class="animated fadeIn fast text-danger" id="">
+                Este campo es requerido.
+              </div>
+            </div>
           </div>
 
           <div class="form-group col-md-6">
-            <label for="Horarios">Horarios<span class="text-danger"> *</span></label>
-            <div class="d-flex" id="">
-              <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio1">Mañana</label>
-              </div>
-              <div class="custom-control custom-radio ml-4">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Tarde</label>
-              </div>
-              <div class="custom-control custom-radio ml-4">
-                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">Noche</label>
-              </div>
+            <div class="ml-md-4" id="">
+              <label for="Horarios">Horarios<span class="text-danger"> *</span></label>
+              <mat-radio-group aria-label="Select an option" formControlName="turno"
+                class="d-flex flex-column flex-sm-row">
+                <mat-radio-button value="Mañana">Mañana</mat-radio-button>
+                <mat-radio-button value="Tarde">Tarde</mat-radio-button>
+                <mat-radio-button value="Noche">Noche</mat-radio-button>
+              </mat-radio-group>
             </div>
-
           </div>
         </div>
 
-        <div class="form-row mt-4" id="">
+        <div class="form-row mt-4" [ngClass]="this.tipoPago">
           <div class="form-group col-md-6">
             <label for="Horarios">Elija una Forma de Pago<span class="text-danger"> *</span></label>
             <div class="d-flex" id="">
-              <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio1">Pago Total de la Carrera</label>
-              </div>
-              <div class="custom-control custom-radio ml-4">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Pago Anual</label>
-              </div>
-              <div class="custom-control custom-radio ml-4">
-                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">Pago Semestral</label>
-              </div>
+              <mat-radio-group aria-label="Select an option" formControlName="pago"
+                class="d-flex flex-column flex-sm-row" (change)="this.opcionesPagos($event)">
+                <mat-radio-button value="Total">Pago Total de la Carrera</mat-radio-button>
+                <mat-radio-button value="Anual" [ngClass]="this.anualSemestral">Pago Anual</mat-radio-button>
+                <mat-radio-button value="Semestral" [ngClass]="this.anualSemestral">Pago Semestral</mat-radio-button>
+                <mat-radio-button value="Mensual">Pago Mensual</mat-radio-button>
+              </mat-radio-group>
             </div>
-
           </div>
         </div>
 
-        <div class="form-group mt-4" id="">
-          <label for="">Detalle del Costo de la Carrera</label>
-        </div>
-        <div class="form-group mt-4" id="">
-          <label for="">Comprobante de Pago<span class="text-danger"> *</span></label>
-          <angular-file-uploader [config]="afuConfig">
-          </angular-file-uploader>
-        </div>
+        <div class="form-group mt-4 mb-4" [ngClass]="this.detalle" id="">
+          <label for="" class="text-info text-uppercase">Detalle del Costo de la Carrera</label>
 
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Carrera</th>
+                <th scope="col">Costo total</th>
+                <th scope="col">Descuento del {{ this.porcentaje }}</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ this.carreraElegida }}</td>
+                <td>{{ this.costoTotal }}</td>
+                <td>{{ this.descuento }}</td>
+                <td>{{ this.total }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="mt-3"><strong>REALICE SU DEPOSITO BANCARIO<br>EN EL BANCO UNION<br>AL NÚMERO DE CUENTA:
+              10000015089556<br>A
+              NOMBRE DE
+              JAIME OTÁLORA BAPTISTA</strong></p>
+        </div>
+        <hr />
+        <h1 class="">COMPROBANTE DE PÁGO</h1>
+        <!-- Comprobante de pago -->
+        <div class="form-group mt-5" id="">
+          <label for="pagoComprobante">Comprobante de Pago<span class="text-danger"> *</span></label>
+          <input type="file" class="d-none" id="pagoComprobante" (change)="onPhotoSelectedPagoComprobante($event)"
+            accept="image/jpeg" #photoInputPagoComprobante>
+          <br>
+          <button type="button" class="btn btn-info" (click)="photoInputPagoComprobante.click()">Subir imagen</button>
+          <span class="ml-2">{{ this.nameFilePagoComprobante }}</span>
+        </div>
+        <hr />
         <!-- Validacion con recapchaV2 -->
         <div class="form-group" id="">
 
@@ -247,18 +498,22 @@
           </ngx-recaptcha2>
           <!-- Validacion -->
           <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-          <!-- <div *ngIf="this.recaptcha.invalid && (this.recaptcha.dirty || this.recaptcha.touched)"> -->
-          <!-- Errores con expresiones regulares -->
-          <!-- <div *ngIf="this.recaptcha.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
-               Verifique que no sea un robot.
-             </div>
-           </div> -->
+          <div *ngIf="this.recaptcha.invalid && (this.recaptcha.dirty || this.recaptcha.touched)">
+            <!-- Errores con expresiones regulares -->
+            <div *ngIf="this.recaptcha.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
+              Verifique que no sea un robot.
+            </div>
+          </div>
         </div>
-
-        <button class="btn btn-success btn-lg mt-4" [routerLink]="[ '/inscripcion']">ENVIAR SOLICITUD DE INSCRIPCIÓN <i
-            class="fa fa-chevron-right"></i> </button>
         <hr>
-        <p>Los campos marcados con <span class="text-danger"> *</span> son obligatorios.</p>
+        <button type="submit" class="btn btn-success btn-lg mt-4" [disabled]="this.formulario.invalid">
+          ENVIAR SOLICITUD DE INSCRIPCIÓN <i class="fa fa-chevron-right"></i>
+        </button>
+        <hr />
+        <p>
+          Los campos marcados con <span class="text-danger"> *</span> son
+          obligatorios.
+        </p>
       </form>
     </div>
   </div>
@@ -266,9 +521,12 @@
 <!-- seccion whatsapp en la web -->
 <div class="container-redes animated fadeIn fast" id="">
   <a href="http://m.me/JacBolivia" target="_blank"><img class="img1 text-white" src="../../../assets/img/messenger2.svg"
-      title="Enviar mensage por facebook" alt="Imagen facebook"></a>
-  <a [href]="'https://api.whatsapp.com/send?phone='+this.listaAcerca?.whatsapp+'&text=Deseo comunicarme con Jac Bolivia.'"
-    target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
-      alt="Imagen whatsapp"></a>
+      title="Enviar mensage por facebook" alt="Imagen facebook" /></a>
+  <a [href]="
+      'https://api.whatsapp.com/send?phone=' +
+      this.listaAcerca?.whatsapp +
+      '&text=Deseo comunicarme con Jac Bolivia.'
+    " target="_blank"><img class="img2" src="../../../assets/img/whatsapp2.svg" title="Enviar mensaje por whatsapp"
+      alt="Imagen whatsapp" /></a>
 </div>
 <!-- fin seccion whatsapp en la web -->

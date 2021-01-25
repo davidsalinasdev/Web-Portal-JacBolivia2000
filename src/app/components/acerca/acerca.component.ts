@@ -55,6 +55,7 @@ export class AcercaComponent implements OnInit {
       behavior: 'auto'
     });
     this.indexWeb();
+
   }
 
   /**

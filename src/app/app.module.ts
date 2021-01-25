@@ -49,6 +49,7 @@ import { SanitizeHtmlPipe } from './pipes/SanitizeHtmlPipe.pipe';
 import { ReflexionesComponent } from './components/reflexiones/reflexiones.component';
 import { VideosComponent } from './components/videos/videos.component';
 import { FormularioInscripcionComponent } from './components/inscribete/formulario-inscripcion/formulario-inscripcion.component';
+import { GraciasComponent } from './components/inscribete/gracias/gracias.component';
 
 
 
@@ -72,7 +73,8 @@ import { FormularioInscripcionComponent } from './components/inscribete/formular
         SanitizeHtmlPipe,
         ReflexionesComponent,
         VideosComponent,
-        FormularioInscripcionComponent
+        FormularioInscripcionComponent,
+        GraciasComponent
 
     ],
     imports: [
@@ -96,6 +98,7 @@ import { FormularioInscripcionComponent } from './components/inscribete/formular
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+
 })
 export class AppModule { }

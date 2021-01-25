@@ -209,6 +209,55 @@ export class HomeService {
   }
 
 
+  // Servicio para fotografias
+  /**
+   * Guarda y recupera el nombre de la imagen desde Laravel
+   */
+  public recuperarNamePhoto(file: File): Observable<any> {
 
+    const fd = new FormData();
+    fd.append('file0', file);
+    // const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'); // la cabecera de conexion
+    // retornamos respuestas de El APIRESTFUL
+    return this.http.post(this.url + 'correos/obtenerNameImagen', fd);
+  }
+
+  // Servicio para fotografias
+  /**
+   * Guarda y recupera el nombre de la imagen desde Laravel
+   */
+  public storeInscripciones(anverso: File, reverso: File, certificado: File, titulo: File, pagoComprobante: File, datosInscripciones: any,): Observable<any> {
+    // console.log(datosInscripciones);
+
+    let fd: FormData = new FormData();
+    fd.append('anverso', anverso);
+    fd.append('reverso', reverso);
+    fd.append('certificado', certificado);
+    fd.append('titulo', titulo);
+    fd.append('pagoComprobante', pagoComprobante);
+    fd.append('inscripcion', datosInscripciones);
+
+
+    return this.http.post(this.url + 'correos/uploadImagen', fd);
+  }
+
+
+  /**
+   * prueba
+   */
+  public pruebas(anverso: File, reverso: File, datos) {
+
+    // const json = JSON.stringify(datosInscripciones); // convertimos el objeto a json.
+    // const params = 'json=' + json; // La varible con la que recibe el parametro. en el API.
+
+    // console.log(params);
+
+    const fd: FormData = new FormData();
+    fd.append('anverso', anverso);
+    fd.append('reverso', reverso);
+    fd.append('inscripcion', datos); // Los objecto siempre van al ultimo
+
+    return this.http.post(this.url + 'correos/uploadImagen', fd);
+  }
 
 }

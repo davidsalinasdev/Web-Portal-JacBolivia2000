@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+
+// Mostrar notifiaciones
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2'
 
 interface Ciudad {
   value: string;
@@ -10,14 +14,31 @@ interface TipoDocumento {
   viewValue: string;
 }
 
+interface Carreras {
+  value: string;
+  viewValue: string;
+}
+
+// Interfas de que tipo de evento
+interface HtmlInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 
 // Servicios
 import { global } from '../../../services/global';
 import { AcercaService } from 'src/app/services/acerca.service';
 import { HomeService } from '../../../services/home.service';
+import { PuenteService } from '../../../services/puente.service';// Desde aqui Formulario-inscripcion a Gracias
+
 
 // Formulaios
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { disableDebugTools } from '@angular/platform-browser';
+import { AngularFileUploaderComponent } from 'angular-file-uploader';
+
+// Rutas navegacion entre paginas
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -46,17 +67,51 @@ export class FormularioInscripcionComponent implements OnInit {
     { value: 'CARNET DE DIPLOMATICO', viewValue: 'CARNET DE DIPLOMATICO' },
 
   ];
+  carreras: Carreras[] = [
+    { value: 'ADMINISTRACIÓN DE EMPRESAS', viewValue: 'ADMINISTRACIÓN DE EMPRESAS' },
+    { value: 'CONTABILIDAD GENERAL', viewValue: 'CONTABILIDAD GENERAL' },
+    { value: 'SECRETARIADO EJECUTIVO', viewValue: 'SECRETARIADO EJECUTIVO' },
+    { value: 'INGLES CONVERSACIONAL', viewValue: 'INGLES CONVERSACIONAL' },
+
+  ];
 
   public listaAcerca: any;
   public imagenWeb: string;
+  public tipoPago: string;
+  public carreraElegida: string;
+  public costoTotal: string;
+  public descuento: string;
+  public total: string;
+  public detalle: string;
+  public porcentaje: string;
+  public anualSemestral: string;
 
-  // Configuración para subir archivos
+  // Imagenes
+  public anverso: File;
+  public reverso: File;
+  public titulo: File;
+  public certificado: File;
+  public pagoComprobante: File;
+  public nameFileAnverso: string;
+  public nameFileReverso: string;
+  public nameFileCertificado: string;
+  public nameFileTitulo: string;
+  public nameFilePagoComprobante: string;
+  public nameAnverso: string;
+  public nameReverso: string;
+  public nameCertificado: string;
+  public nameTitulo: string;
+  public namePagoComprobante: string;
+
+
+  // Configuración para Optener el nombre de una archivo
   afuConfig = {
     multiple: false,
-    formatsAllowed: ".pdf,.docx",
+    // formatsAllowed: ".pdf,.docx",
+    formatsAllowed: ".jpg, .png",
     maxSize: "500",
     uploadAPI: {
-      url: global.url + 'perlitas/upload',
+      url: global.url + 'correos/obtenerNameImagen',
       method: "POST",
       // headers: {
       //   'token-usuario': this.token
@@ -77,21 +132,39 @@ export class FormularioInscripcionComponent implements OnInit {
       sizeLimit: 'Size Limit'
     }
   };
+  @ViewChild('fileUpload')
+  private fileUpload: AngularFileUploaderComponent;
 
   // Formulario de inscripcion
   public formulario: FormGroup;
 
   // Recapcha
   public siteKey: string;
+
+
+
   constructor(
     private acercaServices: AcercaService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private homeServices: HomeService,
+    private toasterServices: ToastrService,
+    private router: Router,
+    private puenteServices: PuenteService) {
     this.siteKey = '6LdTfdgZAAAAAPcTRnWFNs5UNET5TMOikXc-bjK9';
+    this.tipoPago = 'd-none';
+    this.detalle = 'd-none';
+    this.anualSemestral = 'd-block';
+    // this.fileUpload.resetFileUpload();
   }
 
   ngOnInit(): void {
+    window.scroll({
+      top: 0,
+      // left: 100,
+      behavior: 'auto'
+    });
     this.crearFormulario();
-    this.indexWeb();
+    // this.indexWeb();
   }
 
   /**
@@ -104,25 +177,27 @@ export class FormularioInscripcionComponent implements OnInit {
       ciudad: ['', [Validators.required]],
       tipoDocumento: ['', [Validators.required]],
       // tslint:disable-next-line: max-line-length
-      nombres: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$")]],
-      paterno: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/")]],
-      Materno: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/")]],
-      celular: ['', [Validators.required, Validators.pattern(/^[1-9]\d{7,10}$/)]],
+      nombres: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/)]],
+      paterno: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/)]],
+      materno: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/)]],
+      celular: ['', [Validators.required, Validators.pattern(/^[1-9]\d{6,9}$/)]],
       // tslint:disable-next-line: max-line-length
-      email: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&' * +/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")])],
+      email: ['', Validators.compose([Validators.required, Validators.pattern(/^[\w]+@{1}[\w]+\.[a-z]{2,3}$/)])],
 
       //  Datos del padre/Madre o tutor
-      nombresTutor: ['', [Validators.required, Validators.maxLength(30), Validators.pattern("/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/")]],
-      profesion: ['', [Validators.required, Validators.maxLength(20), Validators.pattern("/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/")]],
+      nombresTutor: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/)]],
+      profesion: ['', [Validators.required, Validators.maxLength(50)]],
       carnetPasaporte: ['', [Validators.required, Validators.maxLength(15)]],
-      telefono: ['', [Validators.required, Validators.pattern(/^[1-9]\d{7,10}$/)]],
+      telefono: ['', [Validators.required, Validators.pattern(/^[1-9]\d{6,9}$/)]],
       // tslint:disable-next-line: max-line-length
-      emailTutor: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&' * +/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")])],
+      emailTutor: ['', Validators.compose([Validators.required, Validators.pattern(/^[\w]+@{1}[\w]+\.[a-z]{2,3}$/)])],
       direccion: ['', [Validators.required]],
       zona: ['', [Validators.required]],
-
       // Informacion academica
       carrera: ['', [Validators.required]],
+
+      turno: ['', [Validators.required]],
+      pago: ['', [Validators.required]],
       // Recaptcha
       recaptcha: ['', Validators.required],
     });
@@ -177,11 +252,16 @@ export class FormularioInscripcionComponent implements OnInit {
   get carrera() {
     return this.formulario.get('carrera');
   }
+  get turno() {
+    return this.formulario.get('turno');
+  }
+  get pago() {
+    return this.formulario.get('pago');
+  }
 
   get recaptcha() {
     return this.formulario.get('recaptcha');
   }
-
 
   public indexWeb() {
     this.acercaServices.indexAcerca().subscribe(
@@ -199,5 +279,311 @@ export class FormularioInscripcionComponent implements OnInit {
       }
     );
   }
+
+  /**
+   * onSubmit
+   */
+  public onSubmit(event) {
+    // console.log(this.formulario.value);
+
+    if (this.anverso && this.reverso && this.certificado && this.titulo && this.pagoComprobante) {
+      const datos: any = {
+        carnet: this.carnet.value,
+        carnetPasaporte: this.carnetPasaporte.value,
+        carrera: this.carrera.value,
+        celular: this.celular.value,
+        ciudad: this.ciudad.value,
+        direccion: this.direccion.value,
+        email: this.email.value,
+        emailTutor: this.emailTutor.value,
+        materno: this.materno.value,
+        nombres: this.nombres.value,
+        nombresTutor: this.nombresTutor.value,
+        pago: this.pago.value,
+        paterno: this.paterno.value,
+        profesion: this.profesion.value,
+        telefono: this.telefono.value,
+        tipoDocumento: this.tipoDocumento.value,
+        turno: this.turno.value,
+        zona: this.zona.value,
+        anverso: this.nameAnverso,
+        reverso: this.nameReverso,
+        titulo: this.nameTitulo,
+        certificado: this.nameCertificado,
+        pagoComprobante: this.namePagoComprobante
+      }
+      //   // console.log(datos);
+
+      //   console.log(this.anverso);
+
+
+      // Peticion http
+      this.homeServices.storeInscripciones(this.anverso, this.reverso, this.certificado, this.titulo, this.pagoComprobante, JSON.stringify(datos)).subscribe(
+        resp => {
+          // console.log(resp);
+          if (resp.status === 'success') {
+
+
+            const swalWithBootstrapButtons = Swal.mixin({
+              customClass: {
+                confirmButton: 'btn btn-success ml-3',
+                cancelButton: 'btn btn-danger'
+              },
+              buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+              title: '!Inscribirse ahora!',
+              text: "Esto no podra revertire!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: '¡Inscribirme!',
+              cancelButtonText: 'No, cancelar!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // console.log(resp.datos);
+                // Fornulario Hermano 1
+                this.puenteServices.datosNuevos = resp.datos;
+                // Cambia a otra pagina
+                this.router.navigate(['/gracias']);
+                swalWithBootstrapButtons.fire(
+                  'Aceptado!',
+                  'La inscripcion se realizó con exito!!!',
+                  'success'
+                )
+              } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons.fire(
+                  'Cancelado',
+                  'Revise sus datos y vuelva a intentarlo :)',
+                  'error'
+                )
+              }
+            })
+
+
+          }
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+
+    } else {
+      this.toasterServices.error('¡Todos los archivos son requeridos!', 'Sistema de inscripciones en linea');
+    }
+
+  }
+
+  onChange(datos) {
+    // console.log(datos.value); // Aquí iría tu lógica al momento de seleccionar algo
+    this.tipoPago = 'd-block';
+    this.detalle = 'd-none';
+    this.pago.reset();
+
+    // Logica del pago de inscripciones
+    if (datos.value === 'ADMINISTRACIÓN DE EMPRESAS' || datos.value === 'CONTABILIDAD GENERAL' || datos.value === 'SECRETARIADO EJECUTIVO') {
+
+      this.carreraElegida = datos.value;
+      this.anualSemestral = 'd-block'
+
+    } else {
+      this.carreraElegida = datos.value;
+      this.anualSemestral = 'd-none';
+    }
+  }
+
+  /**
+   * opcionesPagos
+   */
+  public opcionesPagos(options) {
+    // console.log(options.value);
+    this.detalle = 'd-block';
+    // console.log(this.anualSemestral);
+
+    if (this.anualSemestral === 'd-block') {
+      switch (options.value) {
+        case 'Total':
+          this.costoTotal = '14.967 Bs.';
+          this.descuento = '2.993,4 Bs.';
+          this.total = '11.976,6 Bs.';
+          this.porcentaje = '20%';
+          break;
+        case 'Anual':
+          this.costoTotal = '4.989 Bs.';
+          this.descuento = '498,9 Bs.';
+          this.total = '4.490,1 Bs.';
+          this.porcentaje = '10%';
+          break;
+        case 'Semestral':
+          this.costoTotal = '2.694 Bs.';
+          this.descuento = '137,7 Bs.';
+          this.total = '2.559,3 Bs.';
+          this.porcentaje = '5%';
+          break;
+        case 'Mensual':
+          this.costoTotal = '399 Bs.';
+          this.descuento = '0 Bs.';
+          this.total = '399 Bs.';
+          this.porcentaje = '0%';
+          break;
+
+        default:
+          break;
+      }
+
+    } else {
+      switch (options.value) {
+        case 'Total':
+          this.costoTotal = '1.394 Bs.';
+          this.descuento = '139 Bs.';
+          this.total = '1.255 Bs.';
+          this.porcentaje = '10%';
+          break;
+
+        case 'Mensual':
+          this.costoTotal = '199 Bs.';
+          this.descuento = '0 Bs.';
+          this.total = '199 Bs.';
+          this.porcentaje = '0%';
+          break;
+
+        default:
+          break;
+      }
+
+    }
+
+
+
+  }
+
+  // Manejo de imagenes
+  /**
+   * docUpload
+   */
+  public docUpload(evento) {
+    console.log(evento);
+  }
+
+  /**
+   * fileImagen
+   */
+  public onPhotoSelectedAnverso(evento: HtmlInputEvent) {
+
+    if (evento.target.files) {
+      this.anverso = <File>evento.target.files[0];
+      // Nombre del archivo subido
+      this.nameFileAnverso = this.anverso.name;
+
+      this.homeServices.recuperarNamePhoto(this.anverso).subscribe(
+        response => {
+          // console.log(response.image);
+          this.nameAnverso = response.image;
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+    }
+  }
+
+  /**
+   * fileImagen
+   */
+  public onPhotoSelectedReverso(evento: HtmlInputEvent) {
+
+    if (evento.target.files) {
+      this.reverso = <File>evento.target.files[0];
+      // Nombre del archivo subido
+      this.nameFileReverso = this.reverso.name;
+
+      this.homeServices.recuperarNamePhoto(this.reverso).subscribe(
+        response => {
+          // console.log(response.image);
+          this.nameReverso = response.image;
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+    }
+  }
+
+  /**
+   * fileImagen
+   */
+  public onPhotoSelectedCertificado(evento: HtmlInputEvent) {
+
+    if (evento.target.files) {
+      this.certificado = <File>evento.target.files[0];
+      // Nombre del archivo subido
+      this.nameFileCertificado = this.certificado.name;
+
+      this.homeServices.recuperarNamePhoto(this.certificado).subscribe(
+        response => {
+          // console.log(response.image);
+          this.nameCertificado = response.image;
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+    }
+  }
+
+  /**
+   * fileImagen
+   */
+  public onPhotoSelectedTitulo(evento: HtmlInputEvent) {
+
+    if (evento.target.files) {
+      this.titulo = <File>evento.target.files[0];
+      // Nombre del archivo subido
+      this.nameFileTitulo = this.titulo.name;
+
+      this.homeServices.recuperarNamePhoto(this.titulo).subscribe(
+        response => {
+          // console.log(response.image);
+          this.nameTitulo = response.image;
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+    }
+  }
+
+  /**
+   * fileImagen
+   */
+  public onPhotoSelectedPagoComprobante(evento: HtmlInputEvent) {
+
+    if (evento.target.files) {
+      this.pagoComprobante = <File>evento.target.files[0];
+      // Nombre del archivo subido
+      this.nameFilePagoComprobante = this.pagoComprobante.name;
+
+      this.homeServices.recuperarNamePhoto(this.pagoComprobante).subscribe(
+        response => {
+          // console.log(response.image);
+          this.namePagoComprobante = response.image;
+        },
+        err => {
+          console.log(err);
+
+        }
+      );
+    }
+  }
+
 
 }
