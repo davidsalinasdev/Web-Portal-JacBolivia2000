@@ -212,7 +212,7 @@
               #photoInputAnverso>
             <br>
             <button type="button" class="btn btn-info" (click)="photoInputAnverso.click()">Subir imagen</button>
-            <span class="ml-2">{{ this.nameFileAnverso }}</span>
+            <span class="ml-2">{{ this.nameAnverso }}</span>
           </div>
           <!-- Recverso del carnet -->
           <div class="form-group col-md-6" id="">
@@ -221,7 +221,7 @@
               #photoInputReverso>
             <br>
             <button type="button" class="btn btn-info" (click)="photoInputReverso.click()">Subir imagen</button>
-            <span class="ml-2">{{ this.nameFileReverso }}</span>
+            <span class="ml-2">{{ this.nameReverso }}</span>
           </div>
         </div>
         <!-- Certificado de nacimiento -->
@@ -231,7 +231,7 @@
             accept="image/jpeg" #photoInputCertificado>
           <br>
           <button type="button" class="btn btn-info" (click)="photoInputCertificado.click()">Subir imagen</button>
-          <span class="ml-2">{{ this.nameFileCertificado }}</span>
+          <span class="ml-2">{{ this.nameCertificado }}</span>
         </div>
         <!--  Titulo de bachiller -->
         <div class="form-group mt-4" id="">
@@ -240,7 +240,7 @@
             #photoInputTitulo>
           <br>
           <button type="button" class="btn btn-info" (click)="photoInputTitulo.click()">Subir imagen</button>
-          <span class="ml-2">{{ this.nameFileTitulo }}</span>
+          <span class="ml-2">{{ this.nameTitulo }}</span>
         </div>
         <br />
         <hr />
@@ -488,25 +488,25 @@
             accept="image/jpeg" #photoInputPagoComprobante>
           <br>
           <button type="button" class="btn btn-info" (click)="photoInputPagoComprobante.click()">Subir imagen</button>
-          <span class="ml-2">{{ this.nameFilePagoComprobante }}</span>
+          <span class="ml-2">{{ this.namePagoComprobante  }}</span>
         </div>
         <hr />
         <!-- Validacion con recapchaV2 -->
-        <div class="form-group" id="">
+        <!-- <div class="form-group" id="">
 
           <ngx-recaptcha2 #captchaElem [siteKey]="this.siteKey" formControlName="recaptcha">
           </ngx-recaptcha2>
-          <!-- Validacion -->
-          <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+ 
           <div *ngIf="this.recaptcha.invalid && (this.recaptcha.dirty || this.recaptcha.touched)">
-            <!-- Errores con expresiones regulares -->
+    
             <div *ngIf="this.recaptcha.hasError('required')" class="animated fadeIn fast text-color-danger" id="">
               Verifique que no sea un robot.
             </div>
           </div>
-        </div>
+        </div> -->
         <hr>
-        <button type="submit" class="btn btn-success btn-lg mt-4" [disabled]="this.formulario.invalid">
+        <button type="submit" class="btn btn-success btn-lg mt-4" [ngClass]="this.botonEnviar"
+          [disabled]="this.formulario.invalid">
           ENVIAR SOLICITUD DE INSCRIPCIÓN <i class="fa fa-chevron-right"></i>
         </button>
         <hr />
@@ -530,3 +530,10 @@
       alt="Imagen whatsapp" /></a>
 </div>
 <!-- fin seccion whatsapp en la web -->
+
+<div class="alert alert-success fixed-top " [ngClass]="this.alerta" role="alert">
+  <p class="alert-heading display-4 parpadea">Enviando Inscripción</p>
+  <p>Espere por favor el mensaje de confirmación de su inscripción, esto puede tardar varios minutos...</p>
+  <hr>
+  <p class="mb-0">Sistema de Inscripciones Jac Bolivia 2000.</p>
+</div>

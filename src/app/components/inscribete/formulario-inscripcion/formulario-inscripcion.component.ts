@@ -141,7 +141,13 @@ export class FormularioInscripcionComponent implements OnInit {
   // Recapcha
   public siteKey: string;
 
+  // Alerta de inscripcion
+  public alerta: string;
 
+  // Boton de envia
+  public botonEnviar: string;
+
+  public esperandoInscripcion: string;
 
   constructor(
     private acercaServices: AcercaService,
@@ -154,6 +160,9 @@ export class FormularioInscripcionComponent implements OnInit {
     this.tipoPago = 'd-none';
     this.detalle = 'd-none';
     this.anualSemestral = 'd-block';
+    this.alerta = 'd-none';
+    this.botonEnviar = 'd-block';
+
     // this.fileUpload.resetFileUpload();
   }
 
@@ -182,7 +191,7 @@ export class FormularioInscripcionComponent implements OnInit {
       materno: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/)]],
       celular: ['', [Validators.required, Validators.pattern(/^[1-9]\d{6,9}$/)]],
       // tslint:disable-next-line: max-line-length
-      email: ['', Validators.compose([Validators.required, Validators.pattern(/^[\w]+@{1}[\w]+\.[a-z]{2,3}$/)])],
+      email: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z0-9.!#$%&' * +/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)])],
 
       //  Datos del padre/Madre o tutor
       nombresTutor: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/)]],
@@ -190,7 +199,7 @@ export class FormularioInscripcionComponent implements OnInit {
       carnetPasaporte: ['', [Validators.required, Validators.maxLength(15)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[1-9]\d{6,9}$/)]],
       // tslint:disable-next-line: max-line-length
-      emailTutor: ['', Validators.compose([Validators.required, Validators.pattern(/^[\w]+@{1}[\w]+\.[a-z]{2,3}$/)])],
+      emailTutor: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z0-9.!#$%&' * +/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)])],
       direccion: ['', [Validators.required]],
       zona: ['', [Validators.required]],
       // Informacion academica
@@ -199,7 +208,7 @@ export class FormularioInscripcionComponent implements OnInit {
       turno: ['', [Validators.required]],
       pago: ['', [Validators.required]],
       // Recaptcha
-      recaptcha: ['', Validators.required],
+      // recaptcha: ['', Validators.required],
     });
   }
   // Validaciones para formulario
@@ -263,30 +272,36 @@ export class FormularioInscripcionComponent implements OnInit {
     return this.formulario.get('recaptcha');
   }
 
-  public indexWeb() {
-    this.acercaServices.indexAcerca().subscribe(
-      response => {
-        if (response.status === "success") {
-          this.listaAcerca = response.acerca[0];
+  // public indexWeb() {
+  //   this.acercaServices.indexAcerca().subscribe(
+  //     response => {
+  //       if (response.status === "success") {
+  //         this.listaAcerca = response.acerca[0];
 
-          this.imagenWeb = this.listaAcerca.img_inscribete;
-          // console.log(this.listaAcerca);
-        }
-      },
-      error => {
-        console.log(error.error);
+  //         this.imagenWeb = this.listaAcerca.img_inscribete;
+  //         // console.log(this.listaAcerca);
+  //       }
+  //     },
+  //     error => {
+  //       console.log(error.error);
 
-      }
-    );
-  }
+  //     }
+  //   );
+  // }
 
   /**
    * onSubmit
    */
   public onSubmit(event) {
-    // console.log(this.formulario.value);
 
-    if (this.anverso && this.reverso && this.certificado && this.titulo && this.pagoComprobante) {
+
+    // 1 prioridad de ejecución
+    let horaFechaActual = new Date();
+    // convert date to a string in UTC timezone format:
+    if (this.anverso && this.reverso && this.certificado && this.titulo && this.pagoComprobante) { // 2 Prioridad
+      this.alerta = 'd-block';
+      this.botonEnviar = 'd-none';
+      // 3 Prioridad de ejecucion
       const datos: any = {
         carnet: this.carnet.value,
         carnetPasaporte: this.carnetPasaporte.value,
@@ -310,68 +325,59 @@ export class FormularioInscripcionComponent implements OnInit {
         reverso: this.nameReverso,
         titulo: this.nameTitulo,
         certificado: this.nameCertificado,
-        pagoComprobante: this.namePagoComprobante
+        pagoComprobante: this.namePagoComprobante,
+        costoTotal: this.costoTotal,
+        descuento: this.descuento,
+        total: this.total,
+        porcentaje: this.porcentaje,
+        fecha: horaFechaActual
       }
-      //   // console.log(datos);
 
-      //   console.log(this.anverso);
+      const getDatos = () => {
+        // Lo convertimos en una promesa
+        return new Promise((resolve, reject) => {
+          resolve(
+            this.homeServices.storeInscripciones(this.anverso, this.reverso, this.certificado, this.titulo, this.pagoComprobante, JSON.stringify(datos)).subscribe(
+              resp => {
 
-
-      // Peticion http
-      this.homeServices.storeInscripciones(this.anverso, this.reverso, this.certificado, this.titulo, this.pagoComprobante, JSON.stringify(datos)).subscribe(
-        resp => {
-          // console.log(resp);
-          if (resp.status === 'success') {
-
-
-            const swalWithBootstrapButtons = Swal.mixin({
-              customClass: {
-                confirmButton: 'btn btn-success ml-3',
-                cancelButton: 'btn btn-danger'
-              },
-              buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-              title: '!Inscribirse ahora!',
-              text: "Esto no podra revertire!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonText: '¡Inscribirme!',
-              cancelButtonText: 'No, cancelar!',
-              reverseButtons: true
-            }).then((result) => {
-              if (result.isConfirmed) {
-                // console.log(resp.datos);
-                // Fornulario Hermano 1
+                this.esperandoInscripcion = resp.status;
                 this.puenteServices.datosNuevos = resp.datos;
-                // Cambia a otra pagina
-                this.router.navigate(['/gracias']);
-                swalWithBootstrapButtons.fire(
-                  'Aceptado!',
-                  'La inscripcion se realizó con exito!!!',
-                  'success'
-                )
-              } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-              ) {
-                swalWithBootstrapButtons.fire(
-                  'Cancelado',
-                  'Revise sus datos y vuelva a intentarlo :)',
-                  'error'
-                )
-              }
-            })
+              },
+              err => {
+                console.log(err);
 
+              })
+          );
+        })
+      }
 
-          }
-        },
-        err => {
-          console.log(err);
+      async function mostrarDatos() { // Esto es una funcion asincrona
+        // Un await debe estar dentro de una funcion asincrona
+        await getDatos();
 
-        }
-      );
+      }
+
+      // CallBack como ultima ejecucion
+      setTimeout(() => {
+        // 5 Prioridad de ejecucion
+        this.alerta = 'd-none';
+        // 6 Prioridad de ejecucion
+        this.botonEnviar = 'd-block';
+        // 7 Prioridad de ejecucion
+        // Cambia a otra pagina
+        this.router.navigate(['/gracias']);
+        // 8 Prioridad de ejecucion
+        Swal.fire({
+          icon: 'success',
+          title: 'Felicidades!!!',
+          text: 'Su inscripción se ha realizado de forma correcta.',
+          footer: 'Sistema de inscripciones Jac Bolivia 2000.',
+          confirmButtonText: `Aceptar`,
+        });
+      }, 2000);
+
+      // Ejecutamos el async
+      mostrarDatos();
 
     } else {
       this.toasterServices.error('¡Todos los archivos son requeridos!', 'Sistema de inscripciones en linea');
