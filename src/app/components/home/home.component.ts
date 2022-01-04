@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
 
           this.listaNoticias.forEach((element, index) => {
             // console.log(element);
-            if (element.estado === 1) {
+            if (element.estado === '1' || element.estado === 1) {
               // console.log(element.fecha);
 
               element.fecha = moment(element.fecha).format(" Do [ de ] MMMM [ de ] YYYY");
@@ -157,10 +157,10 @@ export class HomeComponent implements OnInit {
 
           this.listaCarreras.forEach(element => {
             // console.log(element);
-            if (element.estado === 1 && element.tipo === 'carrera') {
+            if ((element.estado === '1' || element.estado === 1) && element.tipo === 'carrera') {
               this.nuevaListaCarreras.push(element);
             }
-            if (element.estado === 1 && element.tipo === 'webPages') {
+            if ((element.estado === '1' || element.estado === 1) && element.tipo === 'webPages') {
               this.nuevaListaMas.push(element);
             }
           });
@@ -187,15 +187,22 @@ export class HomeComponent implements OnInit {
         // console.log(response);
         if (response.status === 'success') {
           this.listaOferta = response.oferta;
+          console.log(this.listaOferta);
 
           this.listaOferta.forEach(element => {
             // console.log(element);
-            if (element.estado === 1) {
+            if (element.estado === '1' || element.estado === 1) {
+              // console.log(element);
+
               this.nuevaLista.push(element);
             }
 
           });
+
+
           this.nuevaLista = this.nuevaLista.reverse();
+          console.log(this.nuevaLista);
+
         }
       },
       errors => {

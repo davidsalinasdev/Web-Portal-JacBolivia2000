@@ -52,10 +52,10 @@ export class ReflexionesComponent implements OnInit {
 
         // tslint:disable-next-line: prefer-for-of
         for (let index = 0; index < response.carrera.length; index++) {
-          if (response.carrera[index].tipo === 'reflexion' && response.carrera[index].estado === 1) {
+          if (response.carrera[index].tipo === 'reflexion' && (response.carrera[index].estado === '1' || response.carrera[index].estado === 1)) {
             this.listaReflexion.push(response.carrera[index]);
           }
-          if (response.carrera[index].tipo === 'biblica' && response.carrera[index].estado === 1) {
+          if (response.carrera[index].tipo === 'biblica' && (response.carrera[index].estado === '1' || response.carrera[index].estado === 1)) {
             this.listaReflexionBiblica.push(response.carrera[index]);
           }
         }

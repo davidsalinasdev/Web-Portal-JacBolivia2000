@@ -50,10 +50,10 @@ export class MenuComponent implements OnInit {
 
           this.listaCarreras.forEach(element => {
             // console.log(element);
-            if (element.estado === 1 && element.tipo === 'carrera') {
+            if ((element.estado === '1' || element.estado === 1) && element.tipo === 'carrera') {
               this.nuevaListaCarreras.push(element);
             }
-            if (element.estado === 1 && element.tipo === 'webPages') {
+            if ((element.estado === '1' || element.estado === 1) && element.tipo === 'webPages') {
               this.nuevaListaWebPages.push(element);
             }
           });
