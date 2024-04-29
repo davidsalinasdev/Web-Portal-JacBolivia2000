@@ -6,7 +6,7 @@ export let global = {
 
     // // para el servidor
     url: 'https://jacbolivia2000.com/laravel/public/api/' ||
-        'www.jacbolivia2000.com/laravel/public/api/' || 'jacbolivia2000.com/laravel/public/api/',
+        'https://www.jacbolivia2000.com/laravel/public/api/',
     urlImg: 'https://jacbolivia2000.com/laravel/public/storage/' ||
-        'www.jacbolivia2000.com/laravel/public/api/' || 'jacbolivia2000.com/laravel/public/api/'
+        'https://www.jacbolivia2000.com/laravel/public/api/'
 };
