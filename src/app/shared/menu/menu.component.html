@@ -50,9 +50,7 @@
             MÁS
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <div class="" id="">
-              <a class="dropdown-item" href="https://jacbolivia2000.com/moodle/"  target="_blank">AULA VIRTUAL</a>
-            </div>
+
             <div class="" id="">
               <a class="dropdown-item" [routerLink]="[ '/reflexiones']">REFLEXIONES</a>
             </div>
@@ -61,6 +59,9 @@
             </div>
             <div *ngFor="let item of this.nuevaListaWebPages" class="" id="">
               <a class="dropdown-item" [routerLink]="[ 'carreras',item.id]">{{ item.titulo }}</a>
+            </div>
+            <div class="" id="">
+              <a class="dropdown-item" href="https://jacbolivia2000.com/moodle/" target="_blank">AULA VIRTUAL</a>
             </div>
           </div>
 
